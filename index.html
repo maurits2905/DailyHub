@@ -1,188 +1,282 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#111827" />
-  <title>Daily Puzzle Hub</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="noise"></div>
-  <div class="app-shell">
-    <header class="hero">
-      <nav class="topbar" aria-label="Main navigation">
-        <div class="brand">
-          <div class="brand-mark">✦</div>
-          <div>
-            <p class="eyebrow">Daily ritual</p>
-            <h1>Daily Puzzle Hub</h1>
-          </div>
-        </div>
-        <div class="top-actions">
-          <button class="ghost-btn" id="settingsBtn" type="button">Games</button>
-          <button class="ghost-btn" id="summaryBtn" type="button">Summary</button>
-          <button class="ghost-btn danger-soft" id="resetTodayBtn" type="button">Reset today</button>
-        </div>
-      </nav>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DailyHub</title>
+    <meta
+      name="description"
+      content="A beautiful daily puzzle dashboard for tracking progress, streaks, and results across your favorite daily games."
+    />
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="grain"></div>
 
-      <section class="hero-grid">
-        <div class="hero-copy">
-          <p class="date-pill" id="dateLabel">Today</p>
-          <h2 id="greeting">Good morning</h2>
-          <p class="hero-text">Choose the daily games you actually play, track today’s run, keep your streaks, and build a small history of your puzzle habit.</p>
-          <div class="hero-buttons">
-            <button class="primary-btn" id="startNextBtn" type="button">Play next game</button>
-            <button class="secondary-btn" id="customGameBtn" type="button">Add custom game</button>
-          </div>
-        </div>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="DailyHub home">
+          <span class="brand-mark">✦</span>
+          <span>
+            <span class="eyebrow">Daily ritual</span>
+            <strong>DailyHub</strong>
+          </span>
+        </a>
 
-        <aside class="progress-card" aria-label="Daily progress">
-          <div class="progress-top">
-            <div>
-              <p class="eyebrow">Today</p>
-              <h3 id="progressTitle">0 / 0 done</h3>
+        <nav class="nav-actions" aria-label="Main actions">
+          <button class="nav-pill active" data-scroll="dashboard">
+            Dashboard
+          </button>
+          <button class="nav-pill" data-scroll="calendar">Calendar</button>
+          <button class="nav-pill" id="open-library">Games</button>
+          <button class="nav-pill danger" id="reset-today">Reset today</button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="dashboard">
+          <div class="hero-copy">
+            <div class="date-pill" id="date-pill">Today</div>
+            <h1 id="greeting">Good morning</h1>
+            <p>
+              Pick your daily games, open them fast, track results, and keep
+              your streak without getting punished for games you do not play.
+            </p>
+            <div class="hero-buttons">
+              <button class="primary-btn" id="play-next">Play next game</button>
+              <button class="secondary-btn" id="open-library-hero">
+                Choose games
+              </button>
             </div>
-            <div class="score-orb" id="progressPercent">0%</div>
           </div>
-          <div class="progress-track" aria-hidden="true">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-          <div class="goal-row">
-            <span id="goalStatus">Select games to begin</span>
-            <span id="goalModeLabel">Flexible goal</span>
-          </div>
-        </aside>
-      </section>
-    </header>
 
-    <main>
-      <section class="stats-grid" aria-label="Stats">
-        <article class="stat-card">
-          <span>🔥</span>
-          <div>
-            <p>Current streak</p>
-            <strong id="currentStreak">0 days</strong>
+          <aside class="progress-card" aria-label="Today progress">
+            <div class="progress-head">
+              <span>
+                <span class="eyebrow">Today</span>
+                <strong id="progress-title">0 / 0 done</strong>
+              </span>
+              <div class="progress-ring" id="progress-ring">
+                <span>0%</span>
+              </div>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div id="progress-fill"></div>
+            </div>
+            <div class="progress-meta">
+              <span id="goal-needed">Choose games to begin</span>
+              <span id="goal-label">Flexible goal</span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="stats-grid" aria-label="Stats">
+          <article class="stat-card">
+            <span class="stat-icon">🔥</span>
+            <span>
+              <small>Current streak</small>
+              <strong id="current-streak">0 days</strong>
+            </span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon">🏆</span>
+            <span>
+              <small>Best streak</small>
+              <strong id="best-streak">0 days</strong>
+            </span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon">✅</span>
+            <span>
+              <small>Total completions</small>
+              <strong id="total-completions">0</strong>
+            </span>
+          </article>
+          <article class="stat-card stat-card-select">
+            <span class="stat-icon">🎯</span>
+            <span>
+              <small>Goal mode</small>
+              <select id="goal-mode" aria-label="Goal mode">
+                <option value="strict">Strict: all selected</option>
+                <option value="flexible">Flexible: 80%</option>
+                <option value="relaxed">Relaxed: one game</option>
+              </select>
+            </span>
+          </article>
+        </section>
+
+        <section class="run-section">
+          <div class="section-head">
+            <span>
+              <span class="eyebrow">Next up</span>
+              <h2>Today’s run</h2>
+            </span>
+            <div class="segmented" role="tablist" aria-label="Filter games">
+              <button class="seg active" data-filter="all">All</button>
+              <button class="seg" data-filter="left">Left</button>
+              <button class="seg" data-filter="done">Done</button>
+            </div>
           </div>
-        </article>
-        <article class="stat-card">
-          <span>🏆</span>
-          <div>
-            <p>Best streak</p>
-            <strong id="bestStreak">0 days</strong>
+          <div class="game-grid" id="today-games"></div>
+          <div class="empty-state hidden" id="empty-today">
+            <h3>No games selected yet</h3>
+            <p>
+              Open the game library and choose which daily games should count
+              toward your progress.
+            </p>
+            <button class="primary-btn" id="empty-open-library">
+              Choose games
+            </button>
           </div>
-        </article>
-        <article class="stat-card">
-          <span>📅</span>
-          <div>
-            <p>Tracked days</p>
-            <strong id="trackedDays">0</strong>
+        </section>
+
+        <section class="calendar-section" id="calendar">
+          <div class="section-head calendar-head">
+            <span>
+              <span class="eyebrow">History</span>
+              <h2>Daily calendar</h2>
+            </span>
+            <div class="calendar-meta">
+              <strong id="month-summary">0 goal days</strong>
+              <span id="month-detail">No history yet</span>
+            </div>
           </div>
-        </article>
-        <article class="stat-card">
-          <span>🎯</span>
-          <div>
-            <p>Goal mode</p>
-            <select id="goalMode" aria-label="Goal mode">
-              <option value="strict">Strict: all games</option>
-              <option value="flexible">Flexible: 80%</option>
-              <option value="relaxed">Relaxed: one game</option>
+
+          <div class="calendar-layout">
+            <div class="calendar-panel">
+              <div class="calendar-weekdays">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span
+                ><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
+              <div class="calendar-grid" id="calendar-grid"></div>
+            </div>
+
+            <aside class="day-panel" id="day-panel">
+              <span class="eyebrow">Selected day</span>
+              <h3 id="day-title">Pick a day</h3>
+              <p id="day-subtitle">
+                Click a calendar cell to see completion, goal status, and
+                results.
+              </p>
+              <div class="day-stats">
+                <div>
+                  <small>Completed</small><strong id="day-completed">-</strong>
+                </div>
+                <div><small>Goal</small><strong id="day-goal">-</strong></div>
+                <div>
+                  <small>Games</small><strong id="day-games-count">-</strong>
+                </div>
+              </div>
+              <div class="day-results" id="day-results"></div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div
+      class="modal-backdrop hidden"
+      id="library-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="library-title"
+    >
+      <div class="modal library-modal-card">
+        <div class="modal-head">
+          <span>
+            <span class="eyebrow">Game library</span>
+            <h2 id="library-title">Choose what counts</h2>
+            <p>Only selected games count towards your progress and streak.</p>
+          </span>
+          <button
+            class="icon-btn"
+            id="close-library"
+            aria-label="Close game library"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="library-toolbar">
+          <input
+            type="search"
+            id="library-search"
+            placeholder="Search games, sites, categories..."
+          />
+          <select id="library-category" aria-label="Filter by category">
+            <option value="all">All categories</option>
+          </select>
+          <button class="secondary-btn compact" id="select-suggested">
+            Select suggested
+          </button>
+        </div>
+
+        <div class="library-list" id="library-list"></div>
+
+        <form class="custom-form" id="custom-form">
+          <h3>Add custom game</h3>
+          <div class="form-grid">
+            <input required id="custom-name" placeholder="Game name" />
+            <input
+              required
+              id="custom-url"
+              placeholder="https://example.com"
+              type="url"
+            />
+            <input id="custom-category" placeholder="Category" />
+            <select id="custom-result">
+              <option value="simple">Simple done/not done</option>
+              <option value="score">Score</option>
+              <option value="guesses">Guesses</option>
+              <option value="mistakes">Mistakes</option>
+              <option value="moves">Moves</option>
+              <option value="time">Time</option>
             </select>
           </div>
-        </article>
-      </section>
-
-      <section class="section-head">
-        <div>
-          <p class="eyebrow">Next up</p>
-          <h2>Today’s run</h2>
-        </div>
-        <div class="view-filters" role="group" aria-label="Filter games">
-          <button class="chip active" data-filter="all" type="button">All</button>
-          <button class="chip" data-filter="open" type="button">Left</button>
-          <button class="chip" data-filter="done" type="button">Done</button>
-        </div>
-      </section>
-
-      <section class="game-grid" id="selectedGames" aria-live="polite"></section>
-
-      <section class="panel two-col">
-        <div>
-          <div class="section-head compact">
-            <div>
-              <p class="eyebrow">History</p>
-              <h2>Last 28 days</h2>
-            </div>
-          </div>
-          <div class="heatmap" id="heatmap" aria-label="Completion history"></div>
-        </div>
-        <div class="notes-panel">
-          <label for="dailyNote">Today’s note</label>
-          <textarea id="dailyNote" rows="7" placeholder="Example: Wordle was easy. Strands theme was annoying."></textarea>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <dialog id="libraryDialog" class="modal">
-    <div class="modal-card wide">
-      <div class="modal-head">
-        <div>
-          <p class="eyebrow">Game library</p>
-          <h2>Choose what counts</h2>
-        </div>
-        <button class="icon-btn" id="closeLibraryBtn" aria-label="Close games modal" type="button">×</button>
+          <button class="primary-btn compact" type="submit">Add game</button>
+        </form>
       </div>
-      <p class="muted">Only selected games count towards your progress and streak. Unselected games never punish you.</p>
-      <div class="library-toolbar">
-        <input id="searchGames" type="search" placeholder="Search games..." />
-        <button class="secondary-btn" id="selectSuggestedBtn" type="button">Select suggested</button>
-      </div>
-      <div class="library-list" id="libraryList"></div>
     </div>
-  </dialog>
 
-  <dialog id="customDialog" class="modal">
-    <form class="modal-card" id="customGameForm" method="dialog">
-      <div class="modal-head">
-        <div>
-          <p class="eyebrow">Custom game</p>
-          <h2>Add your own</h2>
+    <div
+      class="modal-backdrop hidden"
+      id="summary-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="summary-title"
+    >
+      <div class="modal summary-card">
+        <div class="modal-head">
+          <span>
+            <span class="eyebrow">Daily recap</span>
+            <h2 id="summary-title">Copy summary</h2>
+          </span>
+          <button
+            class="icon-btn"
+            id="close-summary"
+            aria-label="Close summary"
+          >
+            ×
+          </button>
         </div>
-        <button class="icon-btn" id="closeCustomBtn" aria-label="Close custom game modal" type="button">×</button>
+        <textarea id="summary-text" readonly></textarea>
+        <button class="primary-btn compact" id="copy-summary">
+          Copy summary
+        </button>
       </div>
-      <label>Name <input id="customName" required placeholder="Example: Mini Crossword" /></label>
-      <label>URL <input id="customUrl" required type="url" placeholder="https://..." /></label>
-      <label>Category <input id="customCategory" placeholder="Custom" /></label>
-      <label>Result type
-        <select id="customResultType">
-          <option value="simple">Simple done</option>
-          <option value="score">Score</option>
-          <option value="guesses">Guesses</option>
-          <option value="mistakes">Mistakes</option>
-          <option value="moves">Moves</option>
-          <option value="time">Time</option>
-        </select>
-      </label>
-      <button class="primary-btn" type="submit">Add game</button>
-    </form>
-  </dialog>
-
-  <dialog id="summaryDialog" class="modal">
-    <div class="modal-card">
-      <div class="modal-head">
-        <div>
-          <p class="eyebrow">Daily recap</p>
-          <h2>Copy summary</h2>
-        </div>
-        <button class="icon-btn" id="closeSummaryBtn" aria-label="Close summary modal" type="button">×</button>
-      </div>
-      <textarea id="summaryText" rows="12" readonly></textarea>
-      <button class="primary-btn" id="copySummaryBtn" type="button">Copy summary</button>
-      <p class="toast" id="copyToast" role="status" aria-live="polite"></p>
     </div>
-  </dialog>
 
-  <script src="script.js"></script>
-</body>
+    <button
+      class="floating-summary"
+      id="open-summary"
+      aria-label="Open daily summary"
+    >
+      Recap
+    </button>
+
+    <script src="script.js"></script>
+  </body>
 </html>
