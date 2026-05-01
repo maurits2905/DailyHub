@@ -1,25 +1,23 @@
 # DailyHub
 
-A static daily puzzle dashboard for GitHub Pages.
+A polished static daily puzzle dashboard for GitHub Pages.
 
 ## Features
 
-- Select which games count towards your daily progress
-- Track completion, results, streaks, and monthly history
-- Larger calendar with per-day details
-- Site logos using favicons
-- Custom games
-- No backend, database, login, build step, or API keys
+- Choose which games count toward your daily goal
+- Track completion, results, streaks, and total completions
+- Big monthly calendar with day-by-day details
+- Built-in library of daily games, plus custom games
+- Local-only storage using `localStorage`
+- No backend, no database, no build step, no API keys
 
 ## Deploy on GitHub Pages
 
-1. Push these files to a GitHub repository.
-2. Open the repository on GitHub.
-3. Go to Settings -> Pages.
-4. Choose Deploy from a branch.
-5. Select `main` and `/root`.
-6. Save.
+Upload these files to the root of your repository:
 
-Your site will be available at:
+- `index.html`
+- `style.css`
+- `script.js`
+- `README.md`
 
-`https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`
+Then go to **Settings → Pages → Deploy from a branch → main → /root**.
