@@ -28,9 +28,9 @@
         </a>
 
         <nav class="top-actions" aria-label="Primary actions">
-          <button class="ghost active" data-scroll="dashboard">Today</button>
           <button class="ghost" data-scroll="calendar">Calendar</button>
           <button class="ghost" id="open-library">Games</button>
+          <button class="ghost" id="open-summary">Share</button>
           <button class="ghost danger" id="reset-today">Reset</button>
         </nav>
       </header>
@@ -38,11 +38,16 @@
       <main>
         <section class="hero" id="dashboard">
           <div class="hero-main">
-            <div class="kicker" id="date-pill">Today</div>
+            <div class="date-row">
+              <span class="kicker" id="date-pill">Today</span>
+              <span class="soft-dot"></span>
+              <span id="selected-count-label">0 games selected</span>
+            </div>
             <h1 id="greeting">Good morning</h1>
             <p class="hero-text">
-              Your daily puzzle run in one clean place. Pick only the games you
-              actually play, track results, and keep a streak that feels fair.
+              One calm place for your daily puzzle run. Pick the games you
+              actually play, track your results, and keep a streak that feels
+              fair.
             </p>
 
             <div class="hero-cta">
@@ -54,14 +59,17 @@
                 <span class="btn-icon">＋</span>
                 Choose games
               </button>
-              <button class="btn subtle" id="open-summary">Recap</button>
+              <button class="btn subtle" id="open-summary-hero">
+                <span class="btn-icon">↗</span>
+                Share
+              </button>
             </div>
           </div>
 
           <aside class="today-card" aria-label="Today progress">
             <div class="today-card-head">
               <div>
-                <span class="kicker">Today</span>
+                <span class="kicker">Progress</span>
                 <strong id="progress-title">0 / 0 done</strong>
               </div>
               <div class="progress-ring" id="progress-ring">
@@ -174,6 +182,9 @@
                 <div>
                   <span id="month-rate">0%</span><small>avg completion</small>
                 </div>
+                <div>
+                  <span id="month-perfect">0</span><small>perfect days</small>
+                </div>
               </div>
               <div class="calendar-weekdays">
                 <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span
@@ -217,12 +228,12 @@
             <span class="kicker">Game library</span>
             <h2 id="library-title">Choose what counts</h2>
             <p>
-              Only selected games count toward progress and streaks. Add more
-              from the built-in library or create your own.
+              Only selected games count toward progress and streaks. Search the
+              library, filter by category, or add your own.
             </p>
           </div>
           <button
-            class="icon-btn"
+            class="icon-btn close-btn"
             id="close-library"
             aria-label="Close game library"
           >
@@ -284,13 +295,13 @@
       <div class="modal summary-card">
         <div class="modal-head">
           <div>
-            <span class="kicker">Daily recap</span>
-            <h2 id="summary-title">Copy summary</h2>
+            <span class="kicker">Daily share</span>
+            <h2 id="summary-title">Share summary</h2>
           </div>
           <button
-            class="icon-btn"
+            class="icon-btn close-btn"
             id="close-summary"
-            aria-label="Close summary"
+            aria-label="Close share summary"
           >
             ×
           </button>
@@ -301,6 +312,8 @@
         </button>
       </div>
     </div>
+
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>

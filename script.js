@@ -43,6 +43,7 @@ const GAME_LIBRARY = [
     placeholder: "Example: 02:14",
     accent: "#c2b7ff",
   },
+
   {
     id: "zip",
     name: "Zip",
@@ -87,6 +88,7 @@ const GAME_LIBRARY = [
     placeholder: "Example: 04:12",
     accent: "#70b5f9",
   },
+
   {
     id: "contexto",
     name: "Contexto",
@@ -197,13 +199,14 @@ const GAME_LIBRARY = [
     placeholder: "Found a new game?",
     accent: "#ffd36e",
   },
+
   {
     id: "dordle",
     name: "Dordle",
     category: "Word / Guessing",
-    site: "Dordle",
-    domain: "zaratustra.itch.io",
-    url: "https://zaratustra.itch.io/dordle",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/dordle",
     resultType: "score",
     placeholder: "Example: 6/7",
     accent: "#7fd6a3",
@@ -231,6 +234,39 @@ const GAME_LIBRARY = [
     accent: "#c79bff",
   },
   {
+    id: "sedecordle",
+    name: "Sedecordle",
+    category: "Word / Guessing",
+    site: "Sedecordle",
+    domain: "sedecordle.com",
+    url: "https://www.sedecordle.com/",
+    resultType: "score",
+    placeholder: "Example: 18/21",
+    accent: "#f29cc1",
+  },
+  {
+    id: "woodle",
+    name: "Woodle",
+    category: "Word / Guessing",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/woodle",
+    resultType: "score",
+    placeholder: "Example: 5/6",
+    accent: "#7ce0bd",
+  },
+  {
+    id: "revertle",
+    name: "Revertle",
+    category: "Word / Guessing",
+    site: "Revertle",
+    domain: "revertle.com",
+    url: "https://revertle.com/",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#ffb980",
+  },
+  {
     id: "semantle",
     name: "Semantle",
     category: "Word / Guessing",
@@ -240,6 +276,17 @@ const GAME_LIBRARY = [
     resultType: "guesses",
     placeholder: "Example: 92 guesses",
     accent: "#9de7c9",
+  },
+  {
+    id: "crosswordle",
+    name: "Crosswordle",
+    category: "Word / Guessing",
+    site: "Crosswordle",
+    domain: "crosswordle.vercel.app",
+    url: "https://crosswordle.vercel.app/",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#a8c7ff",
   },
   {
     id: "squareword",
@@ -252,6 +299,95 @@ const GAME_LIBRARY = [
     placeholder: "Example: 8 guesses",
     accent: "#86d6ff",
   },
+  {
+    id: "reversle",
+    name: "Reversle",
+    category: "Word / Guessing",
+    site: "Reversle",
+    domain: "reversle.net",
+    url: "https://reversle.net/",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ffc785",
+  },
+  {
+    id: "absurdle",
+    name: "Absurdle",
+    category: "Word / Guessing",
+    site: "Absurdle",
+    domain: "qntm.org",
+    url: "https://qntm.org/files/absurdle/absurdle.html",
+    resultType: "guesses",
+    placeholder: "Example: 9 guesses",
+    accent: "#ff7a98",
+  },
+  {
+    id: "daily-analogy",
+    name: "Daily Analogy",
+    category: "Word / Guessing",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/daily-analogy",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#a9e5ff",
+  },
+  {
+    id: "cluno",
+    name: "Cluno",
+    category: "Word / Guessing",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/cluno",
+    resultType: "score",
+    placeholder: "Hints used",
+    accent: "#88e1a6",
+  },
+  {
+    id: "matter",
+    name: "Matter",
+    category: "Word / Guessing",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/matter",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#d1d0ff",
+  },
+  {
+    id: "cluecrush",
+    name: "ClueCrush",
+    category: "Word / Guessing",
+    site: "ClueCrush",
+    domain: "cluecrush.com",
+    url: "https://cluecrush.com/",
+    resultType: "mistakes",
+    placeholder: "Example: 1 mistake",
+    accent: "#b39ddb",
+  },
+  {
+    id: "crissword",
+    name: "CrissWord",
+    category: "Word / Guessing",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/crissword",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#9ed1ff",
+  },
+  {
+    id: "letroso",
+    name: "Letroso",
+    category: "Word / Guessing",
+    site: "Letroso",
+    domain: "letroso.com",
+    url: "https://letroso.com/",
+    resultType: "score",
+    placeholder: "Example: 6/6",
+    accent: "#ff9ac7",
+  },
+
   {
     id: "worldle",
     name: "Worldle",
@@ -286,6 +422,29 @@ const GAME_LIBRARY = [
     accent: "#82d6ff",
   },
   {
+    id: "maptap",
+    name: "MapTap",
+    category: "Geography",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/maptap",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#9cd8ff",
+  },
+  {
+    id: "citydle",
+    name: "Citydle",
+    category: "Geography",
+    site: "Citydle",
+    domain: "citydle.com",
+    url: "https://citydle.com/",
+    resultType: "guesses",
+    placeholder: "Example: 4 guesses",
+    accent: "#85e1cf",
+  },
+
+  {
     id: "nerdle",
     name: "Nerdle",
     category: "Math",
@@ -295,6 +454,17 @@ const GAME_LIBRARY = [
     resultType: "score",
     placeholder: "Example: 4/6",
     accent: "#b68cff",
+  },
+  {
+    id: "mathle",
+    name: "Mathle",
+    category: "Math",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/mathle",
+    resultType: "score",
+    placeholder: "Example: 3/5",
+    accent: "#ffd36e",
   },
   {
     id: "mathler",
@@ -307,6 +477,29 @@ const GAME_LIBRARY = [
     placeholder: "Example: 4/6",
     accent: "#ffcd75",
   },
+  {
+    id: "primel",
+    name: "Primel",
+    category: "Math",
+    site: "Primel",
+    domain: "converged.yt",
+    url: "https://converged.yt/primel/",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#c0a6ff",
+  },
+  {
+    id: "seque-ncd",
+    name: "SEQUE-NCD",
+    category: "Math",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/seque-ncd",
+    resultType: "score",
+    placeholder: "Example: 2/3",
+    accent: "#aeeaa2",
+  },
+
   {
     id: "heardle",
     name: "Heardle",
@@ -341,37 +534,126 @@ const GAME_LIBRARY = [
     accent: "#75c6ff",
   },
   {
-    id: "factle",
-    name: "Factle",
-    category: "Quiz / Knowledge",
-    site: "Factle",
-    domain: "factle.app",
-    url: "https://factle.app/",
+    id: "taylordle",
+    name: "Taylordle",
+    category: "Music",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/taylordle",
     resultType: "score",
-    placeholder: "Example: 3/5",
+    placeholder: "Example: 4/6",
+    accent: "#ffc0e0",
+  },
+  {
+    id: "chordle",
+    name: "Chordle",
+    category: "Music",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/chordle",
+    resultType: "score",
+    placeholder: "Example: 3/4",
+    accent: "#bc9cff",
+  },
+  {
+    id: "swiftle",
+    name: "Swiftle",
+    category: "Music",
+    site: "Swiftle",
+    domain: "techyonic.co",
+    url: "https://techyonic.co/swiftle",
+    resultType: "score",
+    placeholder: "Example: 2/6",
+    accent: "#ffb6d2",
+  },
+  {
+    id: "byrdle",
+    name: "Byrdle",
+    category: "Music",
+    site: "Byrdle",
+    domain: "rbrignall.github.io",
+    url: "https://rbrignall.github.io/byrdle/",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#a0e6ff",
+  },
+  {
+    id: "songtosong",
+    name: "SongToSong",
+    category: "Music",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/songtosong",
+    resultType: "score",
+    placeholder: "Optional result",
     accent: "#ffd36e",
   },
+
   {
-    id: "yeardle",
-    name: "Yeardle",
-    category: "Quiz / Knowledge",
-    site: "Yeardle",
-    domain: "histordle.com",
-    url: "https://histordle.com/yeardle/",
+    id: "framed-alt",
+    name: "Framed",
+    category: "Movies & TV",
+    site: "Framed",
+    domain: "framed.wtf",
+    url: "https://framed.wtf",
     resultType: "score",
-    placeholder: "Example: 1974",
-    accent: "#a9d6ff",
+    placeholder: "Example: 2/6",
+    accent: "#d9d9d9",
   },
   {
-    id: "murdle",
-    name: "Murdle",
-    category: "Logic",
-    site: "Murdle",
-    domain: "murdle.com",
-    url: "https://murdle.com/",
-    resultType: "simple",
+    id: "spotle-movie",
+    name: "Spotle Movie",
+    category: "Movies & TV",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/spotle-movie",
+    resultType: "score",
     placeholder: "Optional result",
-    accent: "#cc8cff",
+    accent: "#ffb26e",
+  },
+  {
+    id: "lordle",
+    name: "Lordle of the Rings",
+    category: "Movies & TV",
+    site: "Lordle",
+    domain: "digitaltolkien.github.io",
+    url: "https://digitaltolkien.github.io/vue-wordle/",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#a9d86e",
+  },
+  {
+    id: "swordle",
+    name: "Swordle",
+    category: "Movies & TV",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/swordle",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#a3ccff",
+  },
+  {
+    id: "star-wordle",
+    name: "Star Wordle",
+    category: "Movies & TV",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/star-wordle",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#e9d27a",
+  },
+  {
+    id: "bingewatcher",
+    name: "BingeWatcher",
+    category: "Movies & TV",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/bingewatcher",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ff8f7a",
   },
   {
     id: "cinenoodle",
@@ -385,7 +667,7 @@ const GAME_LIBRARY = [
     accent: "#ff8f7a",
   },
   {
-    id: "moviedle",
+    id: "moviegrid",
     name: "MovieGrid",
     category: "Movies & TV",
     site: "MovieGrid",
@@ -395,6 +677,7 @@ const GAME_LIBRARY = [
     placeholder: "Example: 8/9",
     accent: "#b5a7ff",
   },
+
   {
     id: "guessthegame",
     name: "Guess the Game",
@@ -405,6 +688,195 @@ const GAME_LIBRARY = [
     resultType: "score",
     placeholder: "Example: 4/6",
     accent: "#75e0b7",
+  },
+  {
+    id: "squridle",
+    name: "Squridle",
+    category: "Video Games",
+    site: "Squridle",
+    domain: "squridle.com",
+    url: "https://squridle.com/",
+    resultType: "score",
+    placeholder: "Example: 4/8",
+    accent: "#81e4a4",
+  },
+
+  {
+    id: "poeltl",
+    name: "Poeltl",
+    category: "Sports",
+    site: "Poeltl",
+    domain: "poeltl.dunk.town",
+    url: "https://poeltl.dunk.town/",
+    resultType: "guesses",
+    placeholder: "Example: 5 guesses",
+    accent: "#f6a76c",
+  },
+  {
+    id: "pickle",
+    name: "Pickle",
+    category: "Sports",
+    site: "Pickle",
+    domain: "pickle.sport",
+    url: "https://pickle.sport/",
+    resultType: "guesses",
+    placeholder: "Example: 4 guesses",
+    accent: "#8ae37f",
+  },
+  {
+    id: "hertl",
+    name: "Hertl",
+    category: "Sports",
+    site: "Hertl",
+    domain: "hertl.app",
+    url: "https://www.hertl.app/",
+    resultType: "guesses",
+    placeholder: "Example: 4 guesses",
+    accent: "#7ecbff",
+  },
+  {
+    id: "cfbordle",
+    name: "CFBordle",
+    category: "Sports",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/cfbordle",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#e7955d",
+  },
+  {
+    id: "football-wordle",
+    name: "Football Wordle",
+    category: "Sports",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/football-wordle",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#83df9a",
+  },
+
+  {
+    id: "chronotrivia",
+    name: "ChronoTrivia",
+    category: "Quiz / Knowledge",
+    site: "ChronoTrivia",
+    domain: "chronotrivia.com",
+    url: "https://listdle.com/games/chronotrivia",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ffd36e",
+  },
+  {
+    id: "yearbook",
+    name: "Yearbook",
+    category: "Quiz / Knowledge",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/yearbook",
+    resultType: "score",
+    placeholder: "Example: 1984",
+    accent: "#a9d6ff",
+  },
+  {
+    id: "yeardle",
+    name: "Yeardle",
+    category: "Quiz / Knowledge",
+    site: "Yeardle",
+    domain: "histordle.com",
+    url: "https://histordle.com/yeardle/",
+    resultType: "score",
+    placeholder: "Example: 1974",
+    accent: "#a9d6ff",
+  },
+  {
+    id: "earlier",
+    name: "Earlier",
+    category: "Quiz / Knowledge",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/play-earlier",
+    resultType: "score",
+    placeholder: "Example: 3/3",
+    accent: "#e7c76b",
+  },
+  {
+    id: "factle",
+    name: "Factle",
+    category: "Quiz / Knowledge",
+    site: "Factle",
+    domain: "factle.app",
+    url: "https://factle.app/",
+    resultType: "score",
+    placeholder: "Example: 3/5",
+    accent: "#ffd36e",
+  },
+  {
+    id: "quizl",
+    name: "Quizl",
+    category: "Quiz / Knowledge",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/quizl",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#c7a6ff",
+  },
+  {
+    id: "daily-orbs",
+    name: "Daily Orbs",
+    category: "Quiz / Knowledge",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/daily-orbs",
+    resultType: "score",
+    placeholder: "Example: 6 orbs",
+    accent: "#9ceeff",
+  },
+  {
+    id: "magnitudle",
+    name: "Magnitudle",
+    category: "Quiz / Knowledge",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/magnitudle",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ffb26e",
+  },
+  {
+    id: "bernie-daily",
+    name: "Bernie Daily",
+    category: "Quiz / Knowledge",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/bernie-daily",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#eec37a",
+  },
+  {
+    id: "murdle",
+    name: "Murdle",
+    category: "Logic",
+    site: "Murdle",
+    domain: "murdle.com",
+    url: "https://murdle.com/",
+    resultType: "simple",
+    placeholder: "Optional result",
+    accent: "#cc8cff",
+  },
+  {
+    id: "flipart",
+    name: "Flipart",
+    category: "Visual / Logic",
+    site: "Listdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/flipart",
+    resultType: "simple",
+    placeholder: "Optional result",
+    accent: "#ff91c8",
   },
   {
     id: "morsle",
@@ -437,8 +909,12 @@ const DEFAULT_SELECTED = [
   "pips",
   "contexto",
 ];
-const STORAGE_KEY = "dailyhub-v3-state";
-const LEGACY_KEYS = ["dailyhub-v2-state", "dailyhub-state"];
+const STORAGE_KEY = "dailyhub-v4-state";
+const LEGACY_KEYS = [
+  "dailyhub-v3-state",
+  "dailyhub-v2-state",
+  "dailyhub-state",
+];
 const TODAY_KEY = toDateKey(new Date());
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -449,8 +925,16 @@ let selectedCalendarDate = TODAY_KEY;
 let calendarCursor = new Date();
 calendarCursor.setDate(1);
 calendarCursor.setHours(12, 0, 0, 0);
-let allGames = [...GAME_LIBRARY, ...state.customGames];
+let allGames = dedupeGames([...GAME_LIBRARY, ...state.customGames]);
 
+function dedupeGames(games) {
+  const seen = new Set();
+  return games.filter((game) => {
+    if (seen.has(game.id)) return false;
+    seen.add(game.id);
+    return true;
+  });
+}
 function loadState() {
   const base = {
     selectedGames: DEFAULT_SELECTED,
@@ -561,11 +1045,15 @@ function dayStats(key = TODAY_KEY) {
     snapshot,
   };
 }
-function logoFor(game) {
+function logoFor(game, size = "") {
   const domain = game.domain || domainFromUrl(game.url);
   const favicon = `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(domain)}`;
-  const initials = (game.site || game.name).slice(0, 2).toUpperCase();
-  return `<span class="site-logo" title="${escapeHtml(game.site || game.name)}"><img src="${favicon}" alt="" onerror="this.remove();this.parentElement.textContent='${escapeHtml(initials)}'"></span>`;
+  const initials =
+    (game.site || game.name || "?")
+      .replace(/[^A-Za-z0-9]/g, "")
+      .slice(0, 2)
+      .toUpperCase() || "?";
+  return `<span class="site-logo ${size}" title="${escapeHtml(game.site || game.name)}" data-initials="${escapeHtml(initials)}"><img src="${favicon}" alt="" loading="lazy" onerror="this.remove();this.parentElement.textContent=this.parentElement.dataset.initials"></span>`;
 }
 function formatDate(key, long = false) {
   const date = fromKey(key);
@@ -575,6 +1063,13 @@ function formatDate(key, long = false) {
       ? { weekday: "long", day: "numeric", month: "long", year: "numeric" }
       : { weekday: "short", day: "numeric", month: "short" },
   );
+}
+function toast(message) {
+  const el = $("#toast");
+  el.textContent = message;
+  el.classList.remove("hidden");
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => el.classList.add("hidden"), 2200);
 }
 
 function updateHeader() {
@@ -587,6 +1082,9 @@ function updateHeader() {
     day: "numeric",
     month: "long",
   });
+  const count = selectedGames().length;
+  $("#selected-count-label").textContent =
+    `${count} game${count === 1 ? "" : "s"} selected`;
 }
 function renderProgress() {
   const stats = dayStats();
@@ -675,7 +1173,7 @@ function renderTodayGames() {
             <span class="game-category">${escapeHtml(game.category)}</span>
           </span>
         </div>
-        <span class="status-pill ${done ? "done" : ""}">${done ? "Done" : game.site || "Open"}</span>
+        <span class="status-pill ${done ? "done" : ""}">${done ? "Done" : escapeHtml(game.site || "Open")}</span>
       </div>
       <div class="result-wrap">
         <label for="result-${escapeHtml(game.id)}">Result</label>
@@ -706,7 +1204,8 @@ function renderTodayGames() {
       day.selectedSnapshot = [...state.selectedGames];
       day.goalMode = state.goalMode;
       day.completed[button.dataset.done] = !day.completed[button.dataset.done];
-      saveAndRender();
+      saveState();
+      renderAll();
     }),
   );
 }
@@ -715,30 +1214,50 @@ function renderCalendar() {
   grid.innerHTML = "";
   const year = calendarCursor.getFullYear();
   const month = calendarCursor.getMonth();
+  $("#calendar-month").textContent = calendarCursor.toLocaleDateString(
+    undefined,
+    { month: "long", year: "numeric" },
+  );
+
   const first = new Date(year, month, 1, 12);
   const start = new Date(first);
-  start.setDate(first.getDate() - ((first.getDay() + 6) % 7));
+  const weekday = (first.getDay() + 6) % 7;
+  start.setDate(first.getDate() - weekday);
 
-  let goalDays = 0,
-    activeDays = 0,
-    completedSum = 0,
-    percentSum = 0;
+  let monthGoalDays = 0;
+  let monthCompleted = 0;
+  let monthPossible = 0;
+  let perfectDays = 0;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = toDateKey(new Date(year, month, d, 12));
+    const s = dayStats(key);
+    if (s.total > 0 || state.days[key]) {
+      monthCompleted += s.completed;
+      monthPossible += s.total;
+      if (s.goalMet) monthGoalDays++;
+      if (s.total > 0 && s.completed === s.total) perfectDays++;
+    }
+  }
+  $("#month-goal-days").textContent = String(monthGoalDays);
+  $("#month-completed").textContent = String(monthCompleted);
+  $("#month-rate").textContent = monthPossible
+    ? `${Math.round((monthCompleted / monthPossible) * 100)}%`
+    : "0%";
+  $("#month-perfect").textContent = String(perfectDays);
+
   for (let i = 0; i < 42; i++) {
     const date = new Date(start);
     date.setDate(start.getDate() + i);
     const key = toDateKey(date);
     const stats = dayStats(key);
-    const inMonth = date.getMonth() === month;
-    if (inMonth && state.days[key] && stats.total > 0) {
-      activeDays++;
-      completedSum += stats.completed;
-      percentSum += stats.percent;
-    }
-    if (inMonth && stats.goalMet) goalDays++;
     const cell = document.createElement("button");
-    cell.className = `day-cell ${inMonth ? "" : "is-out"} ${key === TODAY_KEY ? "is-today" : ""} ${key === selectedCalendarDate ? "is-selected" : ""} ${stats.goalMet ? "goal-met" : ""}`;
+    cell.className = "day-cell";
+    if (date.getMonth() !== month) cell.classList.add("is-out");
+    if (key === TODAY_KEY) cell.classList.add("is-today");
+    if (key === selectedCalendarDate) cell.classList.add("is-selected");
+    if (stats.goalMet) cell.classList.add("goal-met");
     cell.style.setProperty("--fill", `${stats.percent}%`);
-    cell.dataset.date = key;
     cell.innerHTML = `<span class="day-num">${date.getDate()}</span><span class="day-score">${stats.total ? `${stats.completed}/${stats.total}` : ""}</span>`;
     cell.addEventListener("click", () => {
       selectedCalendarDate = key;
@@ -747,122 +1266,112 @@ function renderCalendar() {
     });
     grid.appendChild(cell);
   }
-  $("#calendar-month").textContent = calendarCursor.toLocaleDateString(
-    undefined,
-    { month: "long", year: "numeric" },
-  );
-  $("#month-goal-days").textContent = String(goalDays);
-  $("#month-completed").textContent = String(completedSum);
-  $("#month-rate").textContent = activeDays
-    ? `${Math.round(percentSum / activeDays)}%`
-    : "0%";
 }
 function renderSelectedDay() {
   const stats = dayStats(selectedCalendarDate);
   const day = state.days[selectedCalendarDate];
   $("#day-title").textContent = formatDate(selectedCalendarDate, true);
-  $("#day-subtitle").textContent = stats.total
-    ? stats.goalMet
-      ? "Daily goal was completed."
-      : "Daily goal was not completed yet."
-    : "No tracked games for this day.";
+  $("#day-subtitle").textContent = stats.goalMet
+    ? "Daily goal was completed."
+    : "Daily goal was not completed yet.";
   $("#day-completed").textContent = stats.total
     ? `${stats.completed}/${stats.total}`
     : "-";
-  $("#day-goal").textContent = stats.total ? `${stats.goal}` : "-";
+  $("#day-goal").textContent = stats.total ? String(stats.goal) : "-";
   $("#day-percent").textContent = stats.total ? `${stats.percent}%` : "-";
   const results = $("#day-results");
   results.innerHTML = "";
-  if (!stats.total) {
-    results.innerHTML = `<div class="day-result"><span>No games</span><small>Select today's date after tracking something.</small></div>`;
+  if (!stats.snapshot.length) {
+    results.innerHTML = `<div class="day-result"><span class="day-result-title"><strong>No games tracked</strong></span><small>-</small></div>`;
     return;
   }
   stats.snapshot.forEach((id) => {
     const game = gameById(id);
     const done = Boolean(day?.completed?.[id]);
-    const value = day?.results?.[id];
+    const result = day?.results?.[id];
     const row = document.createElement("div");
     row.className = "day-result";
-    row.innerHTML = `<span>${logoFor(game)} ${escapeHtml(game.name)}</span><small>${done ? "Done" : "Left"}${value ? ` · ${escapeHtml(value)}` : ""}</small>`;
+    row.innerHTML = `<span class="day-result-title">${logoFor(game, "mini")}<strong>${escapeHtml(game.name)}</strong></span><small>${done ? "Done" : "Left"}${result ? ` · ${escapeHtml(result)}` : ""}</small>`;
     results.appendChild(row);
   });
 }
-function populateCategories() {
-  const select = $("#library-category");
-  const current = select.value || "all";
+function renderLibrary() {
+  const categorySelect = $("#library-category");
+  const current = categorySelect.value || "all";
   const categories = [...new Set(allGames.map((g) => g.category))].sort();
-  select.innerHTML =
+  categorySelect.innerHTML =
     `<option value="all">All categories</option>` +
     categories
-      .map(
-        (cat) =>
-          `<option value="${escapeHtml(cat)}">${escapeHtml(cat)}</option>`,
-      )
+      .map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`)
       .join("");
-  select.value = categories.includes(current) ? current : "all";
-}
-function renderLibrary() {
-  populateCategories();
+  categorySelect.value = categories.includes(current) ? current : "all";
+
   const search = $("#library-search").value.trim().toLowerCase();
-  const category = $("#library-category").value;
+  const category = categorySelect.value;
   const list = $("#library-list");
-  list.innerHTML = "";
   const games = allGames
-    .filter((game) => {
-      const haystack =
-        `${game.name} ${game.category} ${game.site} ${game.domain}`.toLowerCase();
-      return (
-        (!search || haystack.includes(search)) &&
-        (category === "all" || game.category === category)
-      );
-    })
+    .filter((game) => category === "all" || game.category === category)
+    .filter(
+      (game) =>
+        !search ||
+        [game.name, game.site, game.category, game.domain]
+          .join(" ")
+          .toLowerCase()
+          .includes(search),
+    )
     .sort(
       (a, b) =>
         a.category.localeCompare(b.category) || a.name.localeCompare(b.name),
     );
-  if (!games.length) {
-    list.innerHTML = `<div class="empty-state"><h3>No games found</h3><p>Try another search or add a custom game.</p></div>`;
-    return;
-  }
-  games.forEach((game) => {
-    const selected = state.selectedGames.includes(game.id);
-    const row = document.createElement("div");
-    row.className = "library-row";
-    row.innerHTML = `
+
+  list.innerHTML =
+    games
+      .map((game) => {
+        const selected = state.selectedGames.includes(game.id);
+        return `<div class="library-row">
       <div class="library-info">
         ${logoFor(game)}
-        <div>
+        <span>
           <strong>${escapeHtml(game.name)}</strong>
-          <small>${escapeHtml(game.category)} · ${escapeHtml(game.site || game.domain || "Custom")}</small>
-        </div>
+          <small>${escapeHtml(game.category)} · ${escapeHtml(game.site || game.domain || "Daily game")}</small>
+        </span>
       </div>
-      <button class="toggle ${selected ? "on" : ""}" data-toggle-game="${escapeHtml(game.id)}" aria-label="Toggle ${escapeHtml(game.name)}"></button>`;
-    list.appendChild(row);
-  });
+      <button class="toggle ${selected ? "on" : ""}" data-toggle-game="${escapeHtml(game.id)}" aria-label="Toggle ${escapeHtml(game.name)}"></button>
+    </div>`;
+      })
+      .join("") ||
+    `<div class="empty-state"><h3>No matches</h3><p>Try another search or add it as a custom game.</p></div>`;
+
   $$("[data-toggle-game]").forEach((button) =>
     button.addEventListener("click", () => {
       const id = button.dataset.toggleGame;
-      if (state.selectedGames.includes(id))
+      if (state.selectedGames.includes(id)) {
         state.selectedGames = state.selectedGames.filter(
           (gameId) => gameId !== id,
         );
-      else state.selectedGames.push(id);
-      getDay().selectedSnapshot = [...state.selectedGames];
-      saveAndRender();
-      renderLibrary();
+      } else {
+        state.selectedGames.push(id);
+      }
+      const day = getDay();
+      day.selectedSnapshot = [...state.selectedGames];
+      day.goalMode = state.goalMode;
+      saveState();
+      renderAll();
     }),
   );
 }
-function generateSummary() {
+function buildSummary() {
   const stats = dayStats();
   const day = getDay();
-  const lines = [
-    `DailyHub · ${formatDate(TODAY_KEY, true)}`,
-    "",
-    `Completed: ${stats.completed} / ${stats.total}`,
-    `Goal: ${stats.goalMet ? "complete" : "not complete"} (${state.goalMode})`,
-    "",
-  ];
+  const lines = [];
+  lines.push(`DailyHub · ${formatDate(TODAY_KEY, false)}`);
+  lines.push("");
+  lines.push(`Completed: ${stats.completed} / ${stats.total}`);
+  lines.push(
+    `Goal: ${state.goalMode === "strict" ? "Strict" : state.goalMode === "relaxed" ? "Relaxed" : "Flexible"}`,
+  );
+  lines.push(`Progress: ${stats.percent}%`);
+  lines.push("");
   selectedGames().forEach((game) => {
     const done = day.completed[game.id] ? "✅" : "⬜";
     const result = day.results[game.id] ? ` · ${day.results[game.id]}` : "";
@@ -870,19 +1379,18 @@ function generateSummary() {
   });
   return lines.join("\n");
 }
-function saveAndRender() {
-  saveState();
+function openSummary() {
+  $("#summary-text").value = buildSummary();
+  $("#summary-modal").classList.remove("hidden");
+}
+function renderAll() {
+  updateHeader();
   renderProgress();
   renderStats();
   renderTodayGames();
   renderCalendar();
   renderSelectedDay();
-}
-function openModal(id) {
-  $(id).classList.remove("hidden");
-}
-function closeModal(id) {
-  $(id).classList.add("hidden");
+  renderLibrary();
 }
 function playNext() {
   const day = getDay();
@@ -890,94 +1398,78 @@ function playNext() {
     selectedGames().find((game) => !day.completed[game.id]) ||
     selectedGames()[0];
   if (next) window.open(next.url, "_blank", "noopener,noreferrer");
-  else openModal("#library-modal");
+  else $("#library-modal").classList.remove("hidden");
+}
+function openAllLeft() {
+  const day = getDay();
+  selectedGames()
+    .filter((game) => !day.completed[game.id])
+    .slice(0, 8)
+    .forEach((game) => window.open(game.url, "_blank", "noopener,noreferrer"));
 }
 
 function bindEvents() {
-  $$("[data-scroll]").forEach((btn) =>
-    btn.addEventListener("click", () =>
-      document
-        .getElementById(btn.dataset.scroll)
-        .scrollIntoView({ behavior: "smooth" }),
-    ),
+  $$("[data-scroll]").forEach((button) =>
+    button.addEventListener("click", () => {
+      const target = document.getElementById(button.dataset.scroll);
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }),
   );
-  $("#open-library").addEventListener("click", () => {
-    renderLibrary();
-    openModal("#library-modal");
-  });
-  $("#open-library-hero").addEventListener("click", () => {
-    renderLibrary();
-    openModal("#library-modal");
-  });
-  $("#empty-open-library").addEventListener("click", () => {
-    renderLibrary();
-    openModal("#library-modal");
-  });
+  ["#open-library", "#open-library-hero", "#empty-open-library"].forEach(
+    (selector) =>
+      $(selector)?.addEventListener("click", () =>
+        $("#library-modal").classList.remove("hidden"),
+      ),
+  );
   $("#close-library").addEventListener("click", () =>
-    closeModal("#library-modal"),
+    $("#library-modal").classList.add("hidden"),
+  );
+  ["#open-summary", "#open-summary-hero"].forEach((selector) =>
+    $(selector)?.addEventListener("click", openSummary),
+  );
+  $("#close-summary").addEventListener("click", () =>
+    $("#summary-modal").classList.add("hidden"),
   );
   $("#play-next").addEventListener("click", playNext);
-  $("#open-all-left").addEventListener("click", () =>
-    selectedGames()
-      .filter((g) => !getDay().completed[g.id])
-      .slice(0, 8)
-      .forEach((g) => window.open(g.url, "_blank", "noopener,noreferrer")),
-  );
+  $("#open-all-left").addEventListener("click", openAllLeft);
+  $("#copy-summary").addEventListener("click", async () => {
+    $("#summary-text").select();
+    try {
+      await navigator.clipboard.writeText($("#summary-text").value);
+      toast("Summary copied");
+    } catch {
+      document.execCommand("copy");
+      toast("Summary copied");
+    }
+  });
   $("#reset-today").addEventListener("click", () => {
-    if (!confirm("Reset today's progress?")) return;
-    delete state.days[TODAY_KEY];
-    selectedCalendarDate = TODAY_KEY;
-    saveAndRender();
+    if (!confirm("Reset today’s progress?")) return;
+    state.days[TODAY_KEY] = {
+      completed: {},
+      results: {},
+      selectedSnapshot: [...state.selectedGames],
+      goalMode: state.goalMode,
+    };
+    saveState();
+    renderAll();
   });
   $("#goal-mode").addEventListener("change", (event) => {
     state.goalMode = event.target.value;
     const day = getDay();
     day.goalMode = state.goalMode;
     day.selectedSnapshot = [...state.selectedGames];
-    saveAndRender();
+    saveState();
+    renderAll();
   });
-  $$("[data-filter]").forEach((button) =>
+  $$(".seg").forEach((button) =>
     button.addEventListener("click", () => {
       activeFilter = button.dataset.filter;
-      $$("[data-filter]").forEach((b) =>
-        b.classList.toggle("active", b === button),
+      $$(".seg").forEach((btn) =>
+        btn.classList.toggle("active", btn === button),
       );
       renderTodayGames();
     }),
   );
-  $("#library-search").addEventListener("input", renderLibrary);
-  $("#library-category").addEventListener("change", renderLibrary);
-  $("#select-suggested").addEventListener("click", () => {
-    state.selectedGames = [...DEFAULT_SELECTED];
-    getDay().selectedSnapshot = [...state.selectedGames];
-    saveAndRender();
-    renderLibrary();
-  });
-  $("#custom-form").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const name = $("#custom-name").value.trim();
-    const url = $("#custom-url").value.trim();
-    const category = $("#custom-category").value.trim() || "Custom";
-    const resultType = $("#custom-result").value;
-    const id = `custom-${Date.now()}`;
-    const game = {
-      id,
-      name,
-      category,
-      site: name,
-      domain: domainFromUrl(url),
-      url,
-      resultType,
-      placeholder: "Optional result",
-      accent: "#ffd36e",
-    };
-    state.customGames.push(game);
-    state.selectedGames.push(id);
-    allGames = [...GAME_LIBRARY, ...state.customGames];
-    event.target.reset();
-    saveAndRender();
-    renderLibrary();
-  });
   $("#prev-month").addEventListener("click", () => {
     calendarCursor.setMonth(calendarCursor.getMonth() - 1);
     renderCalendar();
@@ -986,37 +1478,59 @@ function bindEvents() {
     calendarCursor.setMonth(calendarCursor.getMonth() + 1);
     renderCalendar();
   });
-  $("#open-summary").addEventListener("click", () => {
-    $("#summary-text").value = generateSummary();
-    openModal("#summary-modal");
+  $("#library-search").addEventListener("input", renderLibrary);
+  $("#library-category").addEventListener("change", renderLibrary);
+  $("#select-suggested").addEventListener("click", () => {
+    state.selectedGames = [...DEFAULT_SELECTED];
+    const day = getDay();
+    day.selectedSnapshot = [...state.selectedGames];
+    day.goalMode = state.goalMode;
+    saveState();
+    renderAll();
   });
-  $("#close-summary").addEventListener("click", () =>
-    closeModal("#summary-modal"),
-  );
-  $("#copy-summary").addEventListener("click", async () => {
-    $("#summary-text").select();
-    try {
-      await navigator.clipboard.writeText($("#summary-text").value);
-    } catch {
-      document.execCommand("copy");
-    }
-    $("#copy-summary").textContent = "Copied";
-    setTimeout(() => ($("#copy-summary").textContent = "Copy summary"), 1100);
+  $("#custom-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = $("#custom-name").value.trim();
+    const url = $("#custom-url").value.trim();
+    const category = $("#custom-category").value.trim() || "Custom";
+    const resultType = $("#custom-result").value;
+    if (!name || !url) return;
+    const id = `custom-${name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")}-${Date.now().toString(36)}`;
+    const game = {
+      id,
+      name,
+      category,
+      site: domainFromUrl(url),
+      domain: domainFromUrl(url),
+      url,
+      resultType,
+      placeholder: "Optional result",
+      accent: "#ffd36e",
+    };
+    state.customGames.push(game);
+    state.selectedGames.push(id);
+    allGames = dedupeGames([...GAME_LIBRARY, ...state.customGames]);
+    event.target.reset();
+    saveState();
+    renderAll();
+    toast("Game added");
   });
   $$(".modal-backdrop").forEach((backdrop) =>
     backdrop.addEventListener("click", (event) => {
       if (event.target === backdrop) backdrop.classList.add("hidden");
     }),
   );
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape")
-      $$(".modal-backdrop").forEach((m) => m.classList.add("hidden"));
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      $("#library-modal").classList.add("hidden");
+      $("#summary-modal").classList.add("hidden");
+    }
   });
 }
 
-function init() {
-  updateHeader();
-  bindEvents();
-  saveAndRender();
-}
-init();
+bindEvents();
+getDay();
+renderAll();
