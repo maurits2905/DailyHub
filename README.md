@@ -1,37 +1,32 @@
 # DailyHub
 
-A polished daily puzzle dashboard for tracking your daily games in one place.
+A polished daily puzzle dashboard for GitHub Pages.
+
+DailyHub lets you choose the daily games you actually play, open the next unfinished game, paste share results, track completion, and build a calendar history of your puzzle routine.
 
 ## Features
 
-- Select which games count toward your progress
-- Track daily completions, results, streaks, and history
-- Bigger monthly calendar with selected-day details
-- Shareable daily summary
-- Custom game support
-- Expanded curated library inspired by Listdle categories
-- Fully static and ready for GitHub Pages
+- Static site: no backend, no database, no build step
+- Works on GitHub Pages
+- Choose which games count toward your daily run
+- Open next unfinished game
+- Paste result blocks from games like Wordle, Connections, Waffle, Contexto and LinkedIn Games
+- Clean share summary with compact scores and emoji grids
+- Calendar history with red/yellow/green completion states
+- Streaks, total completions and monthly stats
+- Confetti when completing a game
+- Special celebration when all selected games are completed
+- Local-only storage using `localStorage`
 
 ## Deploy on GitHub Pages
 
-1. Upload `index.html`, `style.css`, `script.js`, and `README.md` to your repository root.
-2. Go to **Settings → Pages**.
-3. Choose **Deploy from a branch**.
-4. Select `main` and `/root`.
-5. Save.
+Upload these files to the root of your repository:
 
-## v5 notes
+- `index.html`
+- `style.css`
+- `script.js`
+- `README.md`
 
-- Completed games now get a clearer completed card state.
-- Added Paste result buttons. Copy a share result from a game, paste it into DailyHub, and it marks the game complete.
-- The game library header stays sticky while scrolling.
-- Expanded and deduplicated the game library with more Listdle-inspired daily games.
+Then enable GitHub Pages from:
 
-## Latest update
-
-- Uses all selected games as the standard daily goal.
-- Completed cards replace the result input with a finished state.
-- Calendar days are color-highlighted by completion percentage.
-- Day details scroll inside the side panel.
-- Share modal has a cleaner DailyHub link and copy-link button.
-- Game library header stays visible while scrolling.
+`Settings -> Pages -> Deploy from a branch -> main -> /root`

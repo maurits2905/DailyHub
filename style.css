@@ -2345,3 +2345,529 @@ button.copied {
     width: 100%;
   }
 }
+
+/* v11: bigger open result area, clearer calendar colours */
+.game-card:not(.done) {
+  grid-template-rows: auto minmax(116px, 1fr) auto;
+}
+.game-card:not(.done) .result-wrap {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.game-card:not(.done) .result-line {
+  height: 100%;
+  min-height: 106px;
+}
+.game-card:not(.done) .result-wrap textarea {
+  height: 100%;
+  min-height: 106px;
+  max-height: none;
+  overflow: auto;
+}
+.game-card:not(.done) .paste-btn {
+  min-height: 106px;
+}
+.game-card.done .complete-strip {
+  min-height: 48px;
+}
+.game-card.done .share-preview.compact-preview {
+  max-height: 122px;
+}
+
+/* Calendar cells now tint the whole day by completion level: red, yellow, green */
+.day-cell::before {
+  inset: 0;
+  height: auto;
+  opacity: 0.68;
+  border-radius: inherit;
+}
+.day-cell.completion-empty::before {
+  background: transparent;
+}
+.day-cell.completion-none::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 111, 127, 0.28),
+    rgba(255, 111, 127, 0.08)
+  );
+}
+.day-cell.completion-low::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 111, 127, 0.34),
+    rgba(255, 153, 102, 0.12)
+  );
+}
+.day-cell.completion-mid::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 110, 0.36),
+    rgba(255, 179, 71, 0.12)
+  );
+}
+.day-cell.completion-high::before {
+  background: linear-gradient(
+    135deg,
+    rgba(137, 229, 165, 0.32),
+    rgba(255, 211, 110, 0.12)
+  );
+}
+.day-cell.completion-perfect::before {
+  background: linear-gradient(
+    135deg,
+    rgba(137, 229, 165, 0.44),
+    rgba(87, 211, 134, 0.18)
+  );
+}
+.day-cell.completion-none {
+  border-color: rgba(255, 111, 127, 0.28);
+}
+.day-cell.completion-low {
+  border-color: rgba(255, 127, 139, 0.34);
+}
+.day-cell.completion-mid {
+  border-color: rgba(255, 211, 110, 0.38);
+}
+.day-cell.completion-high,
+.day-cell.completion-perfect {
+  border-color: rgba(137, 229, 165, 0.42);
+}
+
+@media (max-width: 720px) {
+  .game-card:not(.done) {
+    grid-template-rows: auto auto auto;
+  }
+  .game-card:not(.done) .result-line {
+    min-height: 90px;
+  }
+  .game-card:not(.done) .result-wrap textarea {
+    min-height: 90px;
+  }
+  .game-card:not(.done) .paste-btn {
+    min-height: 46px;
+  }
+}
+
+/* v12 fixes */
+.about-card {
+  width: min(720px, 100%);
+}
+.about-body {
+  padding: 22px 24px 26px;
+  display: grid;
+  gap: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  font-weight: 750;
+}
+.about-body p {
+  margin: 0;
+}
+.about-body strong {
+  color: var(--text);
+}
+.about-body code {
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--gold);
+}
+
+.summary-actions {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 24px;
+}
+.summary-card .summary-actions .btn {
+  margin: 0;
+}
+.summary-card textarea {
+  user-select: text;
+  caret-color: transparent;
+}
+.summary-card .btn.copied {
+  background: var(--green);
+  color: #102018;
+  box-shadow:
+    0 0 0 4px rgba(137, 229, 165, 0.16),
+    0 18px 42px rgba(137, 229, 165, 0.18);
+}
+
+.day-result.done {
+  border-color: rgba(137, 229, 165, 0.34);
+  background: linear-gradient(
+    135deg,
+    rgba(137, 229, 165, 0.18),
+    rgba(137, 229, 165, 0.06)
+  );
+}
+.day-result.done small {
+  color: #b9ffd0;
+}
+.day-result.left {
+  border-color: rgba(255, 111, 127, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 111, 127, 0.16),
+    rgba(255, 111, 127, 0.045)
+  );
+}
+.day-result.left small {
+  color: #ffb1ba;
+}
+
+.day-cell.completion-none::before,
+.day-cell.completion-low::before,
+.day-cell.completion-mid::before,
+.day-cell.completion-high::before,
+.day-cell.completion-perfect::before {
+  inset: 0;
+  height: auto;
+  opacity: 0.84;
+  border-radius: inherit;
+}
+.day-cell.completion-none::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 92, 116, 0.36),
+    rgba(255, 92, 116, 0.1)
+  );
+}
+.day-cell.completion-low::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 111, 127, 0.4),
+    rgba(255, 153, 102, 0.14)
+  );
+}
+.day-cell.completion-mid::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 211, 110, 0.46),
+    rgba(255, 176, 80, 0.18)
+  );
+}
+.day-cell.completion-high::before {
+  background: linear-gradient(
+    135deg,
+    rgba(137, 229, 165, 0.46),
+    rgba(255, 211, 110, 0.12)
+  );
+}
+.day-cell.completion-perfect::before {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 235, 143, 0.58),
+    rgba(57, 188, 104, 0.22)
+  );
+}
+.day-cell.completion-none {
+  border-color: rgba(255, 92, 116, 0.38);
+}
+.day-cell.completion-low {
+  border-color: rgba(255, 111, 127, 0.42);
+}
+.day-cell.completion-mid {
+  border-color: rgba(255, 211, 110, 0.48);
+}
+.day-cell.completion-high,
+.day-cell.completion-perfect {
+  border-color: rgba(137, 229, 165, 0.54);
+}
+
+.empty-state h3 {
+  letter-spacing: -0.02em;
+}
+
+/* v13 final polish: compact completed cards, cleaner share preview, production-ready rhythm */
+:root {
+  --card-min: 244px;
+}
+.hero h1 {
+  font-size: clamp(4.1rem, 8.8vw, 7rem);
+  letter-spacing: -0.07em;
+  line-height: 0.86;
+  font-kerning: normal;
+  text-wrap: balance;
+}
+.hero-text {
+  max-width: 680px;
+  font-size: 1.03rem;
+  line-height: 1.62;
+}
+.game-grid {
+  align-items: stretch;
+}
+.game-card {
+  min-height: var(--card-min);
+  isolation: isolate;
+}
+.game-card:not(.done) {
+  grid-template-rows: auto minmax(122px, 1fr) auto;
+}
+.game-card:not(.done) .result-line {
+  min-height: 118px;
+}
+.game-card:not(.done) .result-wrap textarea {
+  min-height: 118px;
+  padding: 16px 16px;
+  line-height: 1.42;
+}
+.game-card:not(.done) .paste-btn {
+  min-height: 118px;
+  align-self: stretch;
+}
+.done-compact-card {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-content: stretch;
+  min-height: var(--card-min);
+  background:
+    radial-gradient(
+      circle at 22% 12%,
+      color-mix(in srgb, var(--accent, #89e5a5) 32%, transparent),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(137, 229, 165, 0.2),
+      rgba(255, 255, 255, 0.065) 48%,
+      color-mix(in srgb, var(--accent, #89e5a5) 17%, transparent)
+    ),
+    rgba(255, 255, 255, 0.07) !important;
+}
+.done-showcase {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 14px;
+  min-height: 158px;
+  padding: 10px 28px 4px;
+}
+.done-logo .site-logo,
+.site-logo.xl {
+  width: 78px;
+  height: 78px;
+  border-radius: 24px;
+  box-shadow: 0 18px 44px
+    color-mix(in srgb, var(--accent, #89e5a5) 22%, rgba(0, 0, 0, 0.32));
+}
+.done-logo .site-logo img,
+.site-logo.xl img {
+  width: 42px;
+  height: 42px;
+}
+.done-logo .logo-fallback,
+.site-logo.xl .logo-fallback {
+  font-size: 1.25rem;
+}
+.done-copy {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+}
+.done-copy h3 {
+  font-size: 1.7rem;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+.done-kicker {
+  color: #aaf3bf;
+  font-size: 0.72rem;
+}
+.done-result-chip {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  max-width: 100%;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(137, 229, 165, 0.32);
+  background: rgba(137, 229, 165, 0.16);
+  color: #eaffef;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.done-card-actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+.done-card-actions .done-btn {
+  min-width: 118px;
+  background: linear-gradient(135deg, #a8f2bd, #7fe59c) !important;
+  color: #102018 !important;
+  box-shadow: 0 16px 34px rgba(137, 229, 165, 0.14);
+}
+.done-compact-card .step-badge {
+  opacity: 0.82;
+  background: rgba(137, 229, 165, 0.82);
+  color: #102018;
+}
+.done-compact-card .game-top,
+.done-compact-card .complete-strip,
+.done-compact-card .share-preview,
+.done-compact-card .game-actions {
+  display: none !important;
+}
+.summary-output {
+  margin: 0 24px 18px;
+  min-height: 310px;
+  max-height: min(52vh, 560px);
+  overflow: auto;
+  padding: 18px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.075);
+  color: var(--text);
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+.summary-output:focus-visible {
+  outline: 3px solid rgba(255, 211, 110, 0.44);
+  outline-offset: 3px;
+}
+.summary-output::-webkit-scrollbar,
+.library-list::-webkit-scrollbar,
+.day-results::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.summary-output::-webkit-scrollbar-thumb,
+.library-list::-webkit-scrollbar-thumb,
+.day-results::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 211, 110, 0.7),
+    rgba(145, 201, 255, 0.42)
+  );
+  border: 2px solid rgba(15, 18, 30, 0.88);
+}
+.summary-output::-webkit-scrollbar-track,
+.library-list::-webkit-scrollbar-track,
+.day-results::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+.summary-card textarea {
+  display: none;
+}
+.summary-actions {
+  justify-content: flex-start;
+}
+.close-btn {
+  display: inline-grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+}
+.modal-head .close-btn {
+  flex: 0 0 48px;
+}
+.library-modal-card {
+  overflow: hidden;
+}
+.library-sticky {
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.2);
+}
+.library-list {
+  scroll-padding-top: 16px;
+}
+.day-panel {
+  max-height: 760px;
+  overflow: hidden;
+}
+.day-results {
+  max-height: 418px;
+  overflow: auto;
+  padding-right: 3px;
+}
+.day-result.done {
+  border-color: rgba(137, 229, 165, 0.48) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(137, 229, 165, 0.22),
+    rgba(137, 229, 165, 0.08)
+  ) !important;
+}
+.day-result.left {
+  border-color: rgba(255, 111, 127, 0.42) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 111, 127, 0.2),
+    rgba(255, 111, 127, 0.06)
+  ) !important;
+}
+.month-stats > div,
+.mini-card,
+.today-card,
+.calendar-card,
+.day-panel,
+.modal,
+.hero {
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.btn:hover,
+.small-action:hover,
+.seg:hover,
+.icon-btn:hover,
+.paste-btn:hover,
+.done-btn:hover,
+.play-link:hover {
+  transform: translateY(-2px);
+}
+.play-link:hover {
+  box-shadow: 0 16px 38px
+    color-mix(in srgb, var(--accent, #ffd36e) 25%, rgba(255, 211, 110, 0.18));
+}
+@media (max-width: 980px) {
+  .hero h1 {
+    font-size: clamp(3.4rem, 12vw, 5.4rem);
+  }
+  .done-logo .site-logo,
+  .site-logo.xl {
+    width: 66px;
+    height: 66px;
+    border-radius: 20px;
+  }
+  .done-copy h3 {
+    font-size: 1.45rem;
+  }
+}
+@media (max-width: 720px) {
+  :root {
+    --card-min: 220px;
+  }
+  .done-showcase {
+    min-height: 140px;
+  }
+  .summary-output {
+    margin-inline: 16px;
+    min-height: 260px;
+    max-height: 48vh;
+  }
+  .game-card:not(.done) .result-line,
+  .game-card:not(.done) .result-wrap textarea {
+    min-height: 96px;
+  }
+  .game-card:not(.done) .paste-btn {
+    min-height: 48px;
+  }
+}

@@ -1583,41 +1583,70 @@ function renderTodayGames() {
     games = games.filter((game) => day.completed[game.id]);
 
   container.innerHTML = "";
-  empty.classList.toggle("hidden", selectedGames().length > 0);
+  const totalSelected = selectedGames().length;
+  if (!totalSelected) {
+    empty.classList.remove("hidden");
+    empty.innerHTML = `<h3>No games selected yet</h3><p>Choose the games that should count toward your daily progress.</p><button class="btn primary" id="empty-open-library">Choose games</button>`;
+    $("#empty-open-library")?.addEventListener("click", () =>
+      $("#library-modal").classList.remove("hidden"),
+    );
+  } else if (!games.length) {
+    empty.classList.remove("hidden");
+    empty.innerHTML =
+      activeFilter === "left"
+        ? `<h3>All done for today</h3><p>There are no unfinished games left. Nice work. Switch to All or Done to review your run.</p>`
+        : `<h3>No games here yet</h3><p>Complete a game and it will show up here.</p>`;
+  } else {
+    empty.classList.add("hidden");
+  }
 
   games.forEach((game, index) => {
     const done = Boolean(day.completed[game.id]);
     const value = day.results[game.id] || "";
+    const label = value ? resultLabel(value, game) : "Completed";
     const card = document.createElement("article");
-    card.className = `game-card roadmap-card ${done ? "done" : ""}`;
+    card.className = `game-card roadmap-card ${done ? "done done-compact-card" : ""}`;
     card.style.setProperty("--accent", game.accent || "#ffd36e");
-    card.innerHTML = `
-      <div class="step-badge" aria-hidden="true">${index + 1}</div>
-      <div class="game-top">
-        <div class="game-title-row">
-          ${logoFor(game)}
-          <span>
+    if (done) {
+      card.innerHTML = `
+        <div class="step-badge" aria-hidden="true">${index + 1}</div>
+        <div class="done-showcase">
+          <div class="done-logo">${logoFor(game, "xl")}</div>
+          <div class="done-copy">
+            <span class="kicker done-kicker">Completed</span>
             <h3>${escapeHtml(game.name)}</h3>
             <span class="game-category">${escapeHtml(game.category)}</span>
-          </span>
+            ${value ? `<strong class="done-result-chip">${escapeHtml(label)}</strong>` : ""}
+          </div>
         </div>
-        <span class="status-pill ${done ? "done" : ""}">${escapeHtml(game.site || "Open")}</span>
-      </div>
-      ${
-        done
-          ? `<div class="complete-strip complete-only"><span>✓ Completed</span>${value ? `<strong>${escapeHtml(resultLabel(value, game))}</strong>` : `<small>No result saved</small>`}</div>${resultPreviewHtml(value, game)}`
-          : `<div class="result-wrap">
-        <label for="result-${escapeHtml(game.id)}">Result</label>
-        <div class="result-line">
-          <textarea id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" rows="2" placeholder="${escapeHtml(game.placeholder || "Paste or type result")}">${escapeHtml(value)}</textarea>
-          <button class="paste-btn" type="button" data-paste="${escapeHtml(game.id)}" title="Paste copied result">Paste</button>
+        <div class="done-card-actions">
+          <button class="done-btn is-done" data-done="${escapeHtml(game.id)}">Undo</button>
+        </div>`;
+    } else {
+      card.innerHTML = `
+        <div class="step-badge" aria-hidden="true">${index + 1}</div>
+        <div class="game-top">
+          <div class="game-title-row">
+            ${logoFor(game)}
+            <span>
+              <h3>${escapeHtml(game.name)}</h3>
+              <span class="game-category">${escapeHtml(game.category)}</span>
+            </span>
+          </div>
+          <span class="status-pill">${escapeHtml(game.site || "Open")}</span>
         </div>
-      </div>`
-      }
-      <div class="game-actions">
-        <a class="play-link" href="${escapeHtml(game.url)}" target="_blank" rel="noopener noreferrer"><span>▶</span> Play</a>
-        <button class="done-btn ${done ? "is-done" : ""}" data-done="${escapeHtml(game.id)}">${done ? "Undo" : "Mark complete"}</button>
-      </div>`;
+        <div class="result-wrap">
+          <label for="result-${escapeHtml(game.id)}">Result</label>
+          <div class="result-line">
+            <textarea id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" rows="4" placeholder="${escapeHtml(game.placeholder || "Paste or type result")}">${escapeHtml(value)}</textarea>
+            <button class="paste-btn" type="button" data-paste="${escapeHtml(game.id)}" title="Paste copied result">Paste</button>
+          </div>
+        </div>
+        <div class="game-actions">
+          <a class="play-link" href="${escapeHtml(game.url)}" target="_blank" rel="noopener noreferrer"><span>▶</span> Play</a>
+          <button class="done-btn" data-done="${escapeHtml(game.id)}">Mark complete</button>
+        </div>`;
+    }
     container.appendChild(card);
   });
 
@@ -1708,7 +1737,10 @@ function renderCalendar() {
     if (date.getMonth() !== month) cell.classList.add("is-out");
     if (key === TODAY_KEY) cell.classList.add("is-today");
     if (key === selectedCalendarDate) cell.classList.add("is-selected");
-    if (stats.goalMet) cell.classList.add("goal-met");
+    if (stats.goalMet) {
+      cell.classList.add("goal-met");
+      cell.classList.add("completion-perfect");
+    }
     cell.classList.add(`completion-${stats.level}`);
     cell.style.setProperty("--fill", `${stats.percent}%`);
     cell.innerHTML = `<span class="day-num">${date.getDate()}</span><span class="day-score">${stats.total ? `${stats.completed}/${stats.total}` : ""}</span>`;
@@ -1743,8 +1775,8 @@ function renderSelectedDay() {
     const done = Boolean(day?.completed?.[id]);
     const result = day?.results?.[id];
     const row = document.createElement("div");
-    row.className = "day-result";
-    row.innerHTML = `<span class="day-result-title">${logoFor(game, "mini")}<strong>${escapeHtml(game.name)}</strong></span><small>${done ? "Done" : "Left"}${result ? ` · ${escapeHtml(result)}` : ""}</small>`;
+    row.className = `day-result ${done ? "done" : "left"}`;
+    row.innerHTML = `<span class="day-result-title">${logoFor(game, "mini")}<strong>${escapeHtml(game.name)}</strong></span><small>${done ? "Done" : "Not done"}${result ? ` · ${escapeHtml(resultLabel(result, game))}` : ""}</small>`;
     results.appendChild(row);
   });
 }
@@ -1826,10 +1858,10 @@ function isEmojiBoardLine(line) {
     clean.match(/[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤⭐★☆👑🛑🧶🏁🔥]|[0-9]️⃣/g) ||
     [];
   const allowed = clean.replace(
-    /[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤⭐★☆👑🛑🧶🏁🔥]|[0-9]️⃣|\s|\|/g,
+    /[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤⭐★☆👑🛑🧶🏁🔥]|[0-9]️⃣|[0-9]|\s|\||:|\.|,/g,
     "",
   );
-  return emojiMatches.length >= 2 && allowed.length === 0;
+  return emojiMatches.length >= 1 && allowed.length === 0;
 }
 function extractScore(text, game = {}, lines = []) {
   const scoreMatch = text.match(/(?:^|\s)([xX\d]+\s*\/\s*\d+)(?:\s|$)/);
@@ -2004,8 +2036,7 @@ function buildSummary() {
   return lines.join("\n");
 }
 function openSummary() {
-  const link = dailyHubLink();
-  $("#summary-text").value = buildSummary();
+  $("#summary-text").textContent = buildSummary();
   $("#summary-modal").classList.remove("hidden");
 }
 function renderAll() {
@@ -2027,10 +2058,16 @@ function playNext() {
 }
 function openAllLeft() {
   const day = getDay();
-  selectedGames()
-    .filter((game) => !day.completed[game.id])
-    .slice(0, 8)
-    .forEach((game) => window.open(game.url, "_blank", "noopener,noreferrer"));
+  const next = selectedGames().find((game) => !day.completed[game.id]);
+  if (next) window.open(next.url, "_blank", "noopener,noreferrer");
+  else {
+    activeFilter = "left";
+    $$(".seg").forEach((btn) =>
+      btn.classList.toggle("active", btn.dataset.filter === "left"),
+    );
+    renderTodayGames();
+    toast("No games left for today");
+  }
 }
 
 function bindEvents() {
@@ -2055,6 +2092,12 @@ function bindEvents() {
   $("#close-summary").addEventListener("click", () =>
     $("#summary-modal").classList.add("hidden"),
   );
+  $("#open-about")?.addEventListener("click", () =>
+    $("#about-modal").classList.remove("hidden"),
+  );
+  $("#close-about")?.addEventListener("click", () =>
+    $("#about-modal").classList.add("hidden"),
+  );
   $("#close-perfect")?.addEventListener("click", () =>
     $("#perfect-modal").classList.add("hidden"),
   );
@@ -2074,24 +2117,22 @@ function bindEvents() {
     }, 1400);
   }
   $("#copy-summary").addEventListener("click", async (event) => {
-    $("#summary-text").select();
     try {
-      await navigator.clipboard.writeText($("#summary-text").value);
+      await navigator.clipboard.writeText(buildSummary());
       copiedFeedback(event.currentTarget);
       toast("Summary copied");
     } catch {
+      const temp = document.createElement("textarea");
+      temp.value = buildSummary();
+      temp.setAttribute("readonly", "");
+      temp.style.position = "fixed";
+      temp.style.left = "-9999px";
+      document.body.appendChild(temp);
+      temp.select();
       document.execCommand("copy");
+      temp.remove();
       copiedFeedback(event.currentTarget);
       toast("Summary copied");
-    }
-  });
-  $("#copy-link")?.addEventListener("click", async (event) => {
-    try {
-      await navigator.clipboard.writeText(dailyHubLink());
-      copiedFeedback(event.currentTarget, "Link copied ✓");
-      toast("DailyHub link copied");
-    } catch {
-      toast("Could not copy link");
     }
   });
   $("#reset-today").addEventListener("click", () => {

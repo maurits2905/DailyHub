@@ -28,8 +28,10 @@
         </a>
 
         <nav class="top-actions" aria-label="Primary actions">
-          <button class="ghost" data-scroll="calendar">Calendar</button>
+          <button class="ghost" id="open-about">About</button>
+          <button class="ghost" data-scroll="dashboard">Home</button>
           <button class="ghost" id="open-library">Games</button>
+          <button class="ghost" data-scroll="calendar">Calendar</button>
           <button class="ghost" id="open-summary">Share</button>
           <button class="ghost danger" id="reset-today">Reset</button>
         </nav>
@@ -45,9 +47,9 @@
             </div>
             <h1 id="greeting">Good morning</h1>
             <p class="hero-text">
-              One calm place for your daily puzzle run. Pick the games you
-              actually play, track your results, and keep a streak that feels
-              fair.
+              One focused place for your daily puzzle ritual. Choose your games,
+              open the next one, paste clean results, and watch your run turn
+              into history.
             </p>
 
             <div class="hero-cta">
@@ -116,7 +118,7 @@
               <h2>Today’s run</h2>
             </div>
             <div class="run-actions">
-              <button class="small-action" id="open-all-left">Open left</button>
+              <button class="small-action" id="open-all-left">Open next</button>
               <div class="segmented" role="tablist" aria-label="Filter games">
                 <button class="seg active" data-filter="all">All</button>
                 <button class="seg" data-filter="left">Left</button>
@@ -301,14 +303,57 @@
             ×
           </button>
         </div>
-        <textarea id="summary-text" readonly></textarea>
+        <div
+          id="summary-text"
+          class="summary-output"
+          tabindex="0"
+          aria-label="Share summary"
+        ></div>
         <div class="summary-actions">
           <button class="btn primary compact" id="copy-summary">
             Copy summary
           </button>
-          <button class="btn soft compact" id="copy-link" type="button">
-            Copy link only
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal-backdrop hidden"
+      id="about-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="about-title"
+    >
+      <div class="modal about-card">
+        <div class="modal-head">
+          <div>
+            <span class="kicker">About DailyHub</span>
+            <h2 id="about-title">Made for Maurits</h2>
+            <p>
+              DailyHub is a personal puzzle dashboard for collecting your daily
+              games in one place.
+            </p>
+          </div>
+          <button
+            class="icon-btn close-btn"
+            id="close-about"
+            aria-label="Close about"
+          >
+            ×
           </button>
+        </div>
+        <div class="about-body">
+          <p>
+            <strong>What it does:</strong> choose the games you actually play,
+            open the next unfinished game, paste share results, track
+            completion, and keep a calendar of your puzzle routine.
+          </p>
+          <p>
+            Your progress is saved locally in this browser with
+            <code>localStorage</code>. There is no backend, login, account,
+            database, or tracking.
+          </p>
+          <p>It runs directly on GitHub Pages as a simple static website.</p>
         </div>
       </div>
     </div>
