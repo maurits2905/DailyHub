@@ -1744,3 +1744,309 @@ main {
     transition: none !important;
   }
 }
+
+/* v7 cleanup: all-tasks goal, cleaner completed cards, fixed modal/footer/calendar/share */
+.icon-btn,
+.close-btn {
+  display: inline-grid;
+  place-items: center;
+  line-height: 1;
+  text-align: center;
+  padding: 0;
+}
+.close-btn {
+  width: 46px;
+  height: 46px;
+  font-size: 1.55rem;
+}
+
+.quick-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.game-card.done {
+  grid-template-rows: auto 1fr auto;
+  min-height: 188px;
+}
+.game-card.done .complete-strip {
+  min-height: 72px;
+  margin: 12px 0 6px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(137, 229, 165, 0.24),
+      rgba(137, 229, 165, 0.08)
+    ),
+    rgba(255, 255, 255, 0.055);
+}
+.game-card.done .complete-strip span {
+  font-size: 1.05rem;
+}
+.game-card.done .complete-strip strong {
+  max-width: 46%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.game-card.done .result-wrap {
+  display: none !important;
+}
+.done-btn.is-done,
+.game-card.done .done-btn {
+  color: #102018;
+  background: linear-gradient(135deg, #a8f2bd, #77dd94);
+  border-color: transparent;
+}
+.game-card.done .play-link {
+  filter: saturate(0.9);
+}
+
+/* Calendar completion colors */
+.day-cell {
+  position: relative;
+  overflow: hidden;
+}
+.day-cell::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--fill, 0%);
+  opacity: 0.78;
+  transition:
+    height 0.25s ease,
+    opacity 0.25s ease;
+  pointer-events: none;
+}
+.day-cell > * {
+  position: relative;
+  z-index: 1;
+}
+.day-cell.completion-none::before {
+  background: transparent;
+}
+.day-cell.completion-low::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 127, 139, 0.08),
+    rgba(255, 127, 139, 0.34)
+  );
+}
+.day-cell.completion-mid::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 211, 110, 0.08),
+    rgba(255, 211, 110, 0.38)
+  );
+}
+.day-cell.completion-high::before {
+  background: linear-gradient(
+    180deg,
+    rgba(145, 201, 255, 0.08),
+    rgba(145, 201, 255, 0.42)
+  );
+}
+.day-cell.completion-perfect::before {
+  background: linear-gradient(
+    180deg,
+    rgba(137, 229, 165, 0.08),
+    rgba(137, 229, 165, 0.48)
+  );
+}
+.day-cell.completion-perfect {
+  border-color: rgba(137, 229, 165, 0.42);
+  box-shadow:
+    inset 0 0 0 1px rgba(137, 229, 165, 0.13),
+    0 12px 30px rgba(42, 199, 107, 0.08);
+}
+.day-cell.completion-low {
+  border-color: rgba(255, 127, 139, 0.18);
+}
+.day-cell.completion-mid {
+  border-color: rgba(255, 211, 110, 0.24);
+}
+.day-cell.completion-high {
+  border-color: rgba(145, 201, 255, 0.24);
+}
+.day-cell.is-selected {
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 211, 110, 0.78),
+    0 16px 40px rgba(255, 211, 110, 0.1);
+}
+
+/* Keep day details contained so the calendar does not get pulled down */
+.calendar-layout {
+  align-items: start;
+}
+.day-panel {
+  max-height: min(720px, calc(100vh - 120px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.day-results {
+  overflow: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+.day-results::-webkit-scrollbar,
+.library-list::-webkit-scrollbar,
+.summary-card textarea::-webkit-scrollbar {
+  width: 10px;
+}
+.day-results::-webkit-scrollbar-thumb,
+.library-list::-webkit-scrollbar-thumb,
+.summary-card textarea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.26);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+}
+.day-results::-webkit-scrollbar-track,
+.library-list::-webkit-scrollbar-track,
+.summary-card textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Library modal: fixed header, cleaner bottom form */
+.library-modal-card {
+  grid-template-rows: auto minmax(250px, 1fr) auto;
+  max-height: min(88vh, 900px);
+}
+.library-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--line);
+}
+.library-list {
+  max-height: none;
+  min-height: 0;
+  padding-bottom: 16px;
+}
+.custom-form {
+  position: relative;
+  bottom: auto;
+  margin: 0;
+  border-radius: 0 0 28px 28px;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 23, 36, 0.94),
+    rgba(20, 23, 36, 0.99)
+  );
+}
+.custom-form .form-grid {
+  align-items: center;
+}
+
+/* Share modal */
+.summary-card {
+  width: min(680px, 100%);
+  overflow: hidden;
+}
+.summary-card textarea {
+  min-height: 300px;
+  max-height: 46vh;
+  resize: vertical;
+  line-height: 1.55;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+.share-link-card {
+  display: grid;
+  gap: 6px;
+  margin: 0 24px 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 211, 110, 0.22);
+  background: rgba(255, 211, 110, 0.08);
+}
+.share-link-card span {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 950;
+}
+.share-link-card a {
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 850;
+}
+.summary-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 24px 24px;
+  flex-wrap: wrap;
+}
+
+/* Footer */
+.site-footer {
+  width: min(100% - 44px, 1220px);
+  margin: -48px auto 44px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(18px);
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.site-footer div {
+  display: grid;
+  gap: 4px;
+}
+.site-footer strong {
+  color: var(--text);
+  font-size: 1.05rem;
+}
+.site-footer span {
+  font-weight: 760;
+}
+.site-footer .ghost {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1050px) {
+  .day-panel {
+    max-height: 560px;
+  }
+}
+@media (max-width: 720px) {
+  .quick-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .day-panel {
+    max-height: 520px;
+  }
+  .summary-card textarea {
+    min-height: 260px;
+  }
+  .share-link-card,
+  .summary-actions {
+    margin-left: 18px;
+    margin-right: 18px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .summary-actions {
+    padding-bottom: 18px;
+  }
+  .site-footer {
+    width: min(100% - 22px, 1200px);
+    margin-top: -52px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

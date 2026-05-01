@@ -1341,7 +1341,7 @@ function dedupeGames(games) {
 function loadState() {
   const base = {
     selectedGames: DEFAULT_SELECTED,
-    goalMode: "flexible",
+    goalMode: "strict",
     days: {},
     customGames: [],
   };
@@ -1401,7 +1401,7 @@ function getDay(key = TODAY_KEY) {
       completed: {},
       results: {},
       selectedSnapshot: [...state.selectedGames],
-      goalMode: state.goalMode,
+      goalMode: "strict",
     };
   }
   return state.days[key];
@@ -1438,11 +1438,16 @@ function categoryIcon(game) {
   return (game.name || "?").slice(0, 2).toUpperCase();
 }
 
-function getGoal(total, mode = state.goalMode) {
-  if (!total) return 0;
-  if (mode === "strict") return total;
-  if (mode === "relaxed") return 1;
-  return Math.ceil(total * 0.8);
+function getGoal(total) {
+  return total || 0;
+}
+function completionLevel(percent, total) {
+  if (!total) return "empty";
+  if (percent === 100) return "perfect";
+  if (percent >= 75) return "high";
+  if (percent >= 40) return "mid";
+  if (percent > 0) return "low";
+  return "none";
 }
 function dayStats(key = TODAY_KEY) {
   const day = state.days[key];
@@ -1453,15 +1458,16 @@ function dayStats(key = TODAY_KEY) {
       : [];
   const total = snapshot.length;
   const completed = snapshot.filter((id) => day?.completed?.[id]).length;
-  const goal = getGoal(total, day?.goalMode || state.goalMode);
+  const goal = getGoal(total);
   const percent = total ? Math.round((completed / total) * 100) : 0;
   return {
     total,
     completed,
     goal,
     percent,
-    goalMet: total > 0 && completed >= goal,
+    goalMet: total > 0 && completed === total,
     snapshot,
+    level: completionLevel(percent, total),
   };
 }
 function logoFor(game, size = "") {
@@ -1517,15 +1523,10 @@ function renderProgress() {
   $("#progress-ring span").textContent = `${stats.percent}%`;
   $("#goal-needed").textContent = stats.total
     ? stats.goalMet
-      ? "Goal completed for today"
-      : `${Math.max(stats.goal - stats.completed, 0)} more needed`
+      ? "All tasks completed"
+      : `${Math.max(stats.total - stats.completed, 0)} left today`
     : "Choose games to begin";
-  $("#goal-label").textContent =
-    state.goalMode === "strict"
-      ? "Strict goal"
-      : state.goalMode === "relaxed"
-        ? "Relaxed goal"
-        : "Flexible goal";
+  $("#goal-label").textContent = "All selected games";
 }
 function calculateStreaks() {
   const keys = Object.keys(state.days).sort();
@@ -1562,7 +1563,11 @@ function renderStats() {
     0,
   );
   $("#total-completions").textContent = String(total);
-  $("#goal-mode").value = state.goalMode;
+  const label = $("#daily-goal-label");
+  if (label)
+    label.textContent = selectedGames().length
+      ? `${selectedGames().length} task${selectedGames().length === 1 ? "" : "s"}`
+      : "All tasks";
 }
 function renderTodayGames() {
   const container = $("#today-games");
@@ -1598,14 +1603,17 @@ function renderTodayGames() {
         </div>
         <span class="status-pill ${done ? "done" : ""}">${done ? "Completed" : escapeHtml(game.site || "Open")}</span>
       </div>
-      ${done ? `<div class="complete-strip"><span>✓ Completed</span>${value ? `<strong>${escapeHtml(value)}</strong>` : `<small>No result saved</small>`}</div>` : ""}
-      <div class="result-wrap">
+      ${
+        done
+          ? `<div class="complete-strip complete-only"><span>✓ Completed</span>${value ? `<strong>${escapeHtml(value)}</strong>` : `<small>No result saved</small>`}</div>`
+          : `<div class="result-wrap">
         <label for="result-${escapeHtml(game.id)}">Result</label>
         <div class="result-line">
           <input id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" placeholder="${escapeHtml(game.placeholder || "Paste or type result")}" value="${escapeHtml(value)}" />
           <button class="paste-btn" type="button" data-paste="${escapeHtml(game.id)}" title="Paste copied result">Paste</button>
         </div>
-      </div>
+      </div>`
+      }
       <div class="game-actions">
         <a class="play-link" href="${escapeHtml(game.url)}" target="_blank" rel="noopener noreferrer"><span>▶</span> Play</a>
         <button class="done-btn ${done ? "is-done" : ""}" data-done="${escapeHtml(game.id)}">${done ? "Undo" : "Mark complete"}</button>
@@ -1701,6 +1709,7 @@ function renderCalendar() {
     if (key === TODAY_KEY) cell.classList.add("is-today");
     if (key === selectedCalendarDate) cell.classList.add("is-selected");
     if (stats.goalMet) cell.classList.add("goal-met");
+    cell.classList.add(`completion-${stats.level}`);
     cell.style.setProperty("--fill", `${stats.percent}%`);
     cell.innerHTML = `<span class="day-num">${date.getDate()}</span><span class="day-score">${stats.total ? `${stats.completed}/${stats.total}` : ""}</span>`;
     cell.addEventListener("click", () => {
@@ -1716,8 +1725,8 @@ function renderSelectedDay() {
   const day = state.days[selectedCalendarDate];
   $("#day-title").textContent = formatDate(selectedCalendarDate, true);
   $("#day-subtitle").textContent = stats.goalMet
-    ? "Daily goal was completed."
-    : "Daily goal was not completed yet.";
+    ? "All selected games were completed."
+    : "Still missing selected games for this day.";
   $("#day-completed").textContent = stats.total
     ? `${stats.completed}/${stats.total}`
     : "-";
@@ -1882,10 +1891,10 @@ function buildSummary() {
   lines.push("");
   lines.push(`Completed: ${stats.completed} / ${stats.total}`);
   lines.push(
-    `Goal: ${state.goalMode === "strict" ? "Strict" : state.goalMode === "relaxed" ? "Relaxed" : "Flexible"}`,
+    `Goal: all ${stats.total} selected game${stats.total === 1 ? "" : "s"}`,
   );
   lines.push(`Progress: ${stats.percent}%`);
-  lines.push(`DailyHub: ${dailyHubLink()}`);
+  lines.push(`Open DailyHub: ${dailyHubLink()}`);
   lines.push("");
   selectedGames().forEach((game) => {
     const done = day.completed[game.id] ? "✅" : "⬜";
@@ -1895,7 +1904,13 @@ function buildSummary() {
   return lines.join("\n");
 }
 function openSummary() {
+  const link = dailyHubLink();
   $("#summary-text").value = buildSummary();
+  const linkEl = $("#share-link");
+  if (linkEl) {
+    linkEl.href = link;
+    linkEl.textContent = link;
+  }
   $("#summary-modal").classList.remove("hidden");
 }
 function renderAll() {
@@ -1930,11 +1945,15 @@ function bindEvents() {
       target?.scrollIntoView({ behavior: "smooth", block: "start" });
     }),
   );
-  ["#open-library", "#open-library-hero", "#empty-open-library"].forEach(
-    (selector) =>
-      $(selector)?.addEventListener("click", () =>
-        $("#library-modal").classList.remove("hidden"),
-      ),
+  [
+    "#open-library",
+    "#open-library-hero",
+    "#empty-open-library",
+    "#footer-open-library",
+  ].forEach((selector) =>
+    $(selector)?.addEventListener("click", () =>
+      $("#library-modal").classList.remove("hidden"),
+    ),
   );
   $("#close-library").addEventListener("click", () =>
     $("#library-modal").classList.add("hidden"),
@@ -1964,22 +1983,22 @@ function bindEvents() {
       toast("Summary copied");
     }
   });
+  $("#copy-link")?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(dailyHubLink());
+      toast("DailyHub link copied");
+    } catch {
+      toast("Could not copy link");
+    }
+  });
   $("#reset-today").addEventListener("click", () => {
     if (!confirm("Reset today’s progress?")) return;
     state.days[TODAY_KEY] = {
       completed: {},
       results: {},
       selectedSnapshot: [...state.selectedGames],
-      goalMode: state.goalMode,
+      goalMode: "strict",
     };
-    saveState();
-    renderAll();
-  });
-  $("#goal-mode").addEventListener("change", (event) => {
-    state.goalMode = event.target.value;
-    const day = getDay();
-    day.goalMode = state.goalMode;
-    day.selectedSnapshot = [...state.selectedGames];
     saveState();
     renderAll();
   });

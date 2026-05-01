@@ -107,15 +107,11 @@
               ><strong id="total-completions">0</strong>
             </div>
           </article>
-          <article class="mini-card setting-card">
+          <article class="mini-card">
             <span class="mini-icon">🎯</span>
             <div>
-              <small>Goal mode</small>
-              <select id="goal-mode" aria-label="Goal mode">
-                <option value="strict">Strict: all selected</option>
-                <option value="flexible">Flexible: 80%</option>
-                <option value="relaxed">Relaxed: one game</option>
-              </select>
+              <small>Daily goal</small
+              ><strong id="daily-goal-label">All tasks</strong>
             </div>
           </article>
         </section>
@@ -312,10 +308,24 @@
             ×
           </button>
         </div>
+        <div class="share-link-card">
+          <span>DailyHub link</span>
+          <a
+            id="share-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          ></a>
+        </div>
         <textarea id="summary-text" readonly></textarea>
-        <button class="btn primary compact" id="copy-summary">
-          Copy summary
-        </button>
+        <div class="summary-actions">
+          <button class="btn primary compact" id="copy-summary">
+            Copy summary
+          </button>
+          <button class="btn soft compact" id="copy-link" type="button">
+            Copy link only
+          </button>
+        </div>
       </div>
     </div>
 
@@ -358,6 +368,19 @@
         </div>
       </div>
     </div>
+
+    <footer class="site-footer">
+      <div>
+        <strong>DailyHub</strong>
+        <span
+          >Your puzzle run, progress and history are saved locally in this
+          browser.</span
+        >
+      </div>
+      <button class="ghost" id="footer-open-library" type="button">
+        Edit games
+      </button>
+    </footer>
 
     <script src="script.js"></script>
   </body>

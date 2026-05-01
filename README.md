@@ -26,3 +26,12 @@ A polished daily puzzle dashboard for tracking your daily games in one place.
 - Added Paste result buttons. Copy a share result from a game, paste it into DailyHub, and it marks the game complete.
 - The game library header stays sticky while scrolling.
 - Expanded and deduplicated the game library with more Listdle-inspired daily games.
+
+## Latest update
+
+- Uses all selected games as the standard daily goal.
+- Completed cards replace the result input with a finished state.
+- Calendar days are color-highlighted by completion percentage.
+- Day details scroll inside the side panel.
+- Share modal has a cleaner DailyHub link and copy-link button.
+- Game library header stays visible while scrolling.
