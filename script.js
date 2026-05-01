@@ -1605,11 +1605,11 @@ function renderTodayGames() {
       </div>
       ${
         done
-          ? `<div class="complete-strip complete-only"><span>✓ Completed</span>${value ? `<strong>${escapeHtml(value)}</strong>` : `<small>No result saved</small>`}</div>`
+          ? `<div class="complete-strip complete-only"><span>✓ Completed</span>${value ? `<strong>${escapeHtml(resultLabel(value, game))}</strong>` : `<small>No result saved</small>`}</div>${resultPreviewHtml(value, game)}`
           : `<div class="result-wrap">
         <label for="result-${escapeHtml(game.id)}">Result</label>
         <div class="result-line">
-          <input id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" placeholder="${escapeHtml(game.placeholder || "Paste or type result")}" value="${escapeHtml(value)}" />
+          <textarea id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" rows="2" placeholder="${escapeHtml(game.placeholder || "Paste or type result")}">${escapeHtml(value)}</textarea>
           <button class="paste-btn" type="button" data-paste="${escapeHtml(game.id)}" title="Paste copied result">Paste</button>
         </div>
       </div>`
@@ -1816,6 +1816,58 @@ function renderLibrary() {
     }),
   );
 }
+
+function parseSharedResult(raw, game = {}) {
+  const text = String(raw || "")
+    .replace(/\r\n/g, "\n")
+    .trim();
+  if (!text) return { raw: "", label: "", grid: [], hasShareBlock: false };
+  const lines = text
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .filter((line) => line.trim().length);
+  const grid = lines.filter(
+    (line) =>
+      /^[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤\s]+$/u.test(line.trim()) &&
+      /[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤]/u.test(line),
+  );
+  const scoreMatch = text.match(/(?:^|\s)([xX\d]+\s*\/\s*\d+)(?:\s|$)/);
+  const puzzleMatch = text.match(/Puzzle\s*#?\s*([\d.,]+)/i);
+  const guessMatch = text.match(/(\d+)\s*(?:guesses|guess)/i);
+  const timeMatch = text.match(/\b(\d{1,2}:\d{2})\b/);
+  let label = "";
+  if (scoreMatch) label = scoreMatch[1].replace(/\s+/g, "");
+  else if (guessMatch) label = `${guessMatch[1]} guesses`;
+  else if (timeMatch) label = timeMatch[1];
+  else if (puzzleMatch && grid.length) label = `Puzzle #${puzzleMatch[1]}`;
+  else if (lines[0] && lines[0].length <= 40) label = lines[0];
+  else label = "Saved result";
+  return {
+    raw: text,
+    label,
+    grid,
+    hasShareBlock: lines.length > 1 || grid.length > 0,
+  };
+}
+function resultLabel(raw, game) {
+  return parseSharedResult(raw, game).label || "No result saved";
+}
+function resultPreviewHtml(raw, game) {
+  const parsed = parseSharedResult(raw, game);
+  if (!parsed.raw) return "";
+  const lines = parsed.raw.split("\n").filter((line) => line.trim().length);
+  if (parsed.grid.length) {
+    const titleLines = lines
+      .filter((line) => !parsed.grid.includes(line))
+      .slice(0, 2);
+    return `<div class="share-preview">${titleLines.length ? `<div class="share-preview-title">${titleLines.map(escapeHtml).join("<br>")}</div>` : ""}<pre>${escapeHtml(parsed.grid.join("\n"))}</pre></div>`;
+  }
+  if (parsed.hasShareBlock) {
+    return `<div class="share-preview text-only">${lines.slice(0, 4).map(escapeHtml).join("<br>")}</div>`;
+  }
+  return "";
+}
+
 function dailyHubLink() {
   if (location.protocol === "http:" || location.protocol === "https:")
     return location.origin + location.pathname;
@@ -1898,8 +1950,19 @@ function buildSummary() {
   lines.push("");
   selectedGames().forEach((game) => {
     const done = day.completed[game.id] ? "✅" : "⬜";
-    const result = day.results[game.id] ? ` · ${day.results[game.id]}` : "";
-    lines.push(`${done} ${game.name}${result}`);
+    const rawResult = (day.results[game.id] || "").trim();
+    if (!rawResult) {
+      lines.push(`${done} ${game.name}`);
+      return;
+    }
+    const parsed = parseSharedResult(rawResult, game);
+    if (parsed.hasShareBlock) {
+      lines.push(`${done} ${game.name}`);
+      lines.push(rawResult);
+      lines.push("");
+    } else {
+      lines.push(`${done} ${game.name} · ${rawResult}`);
+    }
   });
   return lines.join("\n");
 }

@@ -2183,3 +2183,74 @@ main {
     letter-spacing: -0.04em;
   }
 }
+
+/* v9: shared result support */
+.result-wrap textarea {
+  width: 100%;
+  min-height: 48px;
+  max-height: 130px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.085);
+  color: var(--text);
+  outline: none;
+  padding: 12px 14px;
+  line-height: 1.35;
+}
+.result-wrap textarea:focus {
+  border-color: color-mix(in srgb, var(--accent, #ffd36e) 55%, white);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--accent, #ffd36e) 18%, transparent);
+}
+.result-line {
+  align-items: stretch;
+}
+.paste-btn {
+  min-height: 48px;
+}
+.share-preview {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 10, 18, 0.34);
+  color: rgba(255, 255, 255, 0.88);
+  overflow: hidden;
+}
+.share-preview-title {
+  margin-bottom: 9px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.84rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+.share-preview pre {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.22;
+  font-size: 1.08rem;
+  letter-spacing: 0.02em;
+}
+.share-preview.text-only {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.75);
+}
+.summary-card textarea {
+  white-space: pre-wrap;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+@media (max-width: 720px) {
+  .result-wrap textarea {
+    min-height: 78px;
+  }
+}
