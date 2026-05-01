@@ -223,36 +223,42 @@
       aria-labelledby="library-title"
     >
       <div class="modal library-modal-card">
-        <div class="modal-head">
-          <div>
-            <span class="kicker">Game library</span>
-            <h2 id="library-title">Choose what counts</h2>
-            <p>
-              Only selected games count toward progress and streaks. Search the
-              library, filter by category, or add your own.
-            </p>
+        <div class="library-sticky">
+          <div class="modal-head">
+            <div>
+              <span class="kicker">Game library</span>
+              <h2 id="library-title">Choose what counts</h2>
+              <p>
+                Only selected games count toward progress and streaks. Search
+                the library, filter by category, or add your own.
+              </p>
+            </div>
+            <button
+              class="icon-btn close-btn"
+              id="close-library"
+              aria-label="Close game library"
+            >
+              ×
+            </button>
           </div>
-          <button
-            class="icon-btn close-btn"
-            id="close-library"
-            aria-label="Close game library"
-          >
-            ×
-          </button>
-        </div>
 
-        <div class="library-toolbar">
-          <input
-            type="search"
-            id="library-search"
-            placeholder="Search games, sites, categories..."
-          />
-          <select id="library-category" aria-label="Filter by category">
-            <option value="all">All categories</option>
-          </select>
-          <button class="btn soft compact" id="select-suggested" type="button">
-            Suggested
-          </button>
+          <div class="library-toolbar">
+            <input
+              type="search"
+              id="library-search"
+              placeholder="Search games, sites, categories..."
+            />
+            <select id="library-category" aria-label="Filter by category">
+              <option value="all">All categories</option>
+            </select>
+            <button
+              class="btn soft compact"
+              id="select-suggested"
+              type="button"
+            >
+              Suggested
+            </button>
+          </div>
         </div>
 
         <div class="library-list" id="library-list"></div>

@@ -19,3 +19,10 @@ A polished daily puzzle dashboard for tracking your daily games in one place.
 3. Choose **Deploy from a branch**.
 4. Select `main` and `/root`.
 5. Save.
+
+## v5 notes
+
+- Completed games now get a clearer completed card state.
+- Added Paste result buttons. Copy a share result from a game, paste it into DailyHub, and it marks the game complete.
+- The game library header stays sticky while scrolling.
+- Expanded and deduplicated the game library with more Listdle-inspired daily games.

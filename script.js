@@ -425,9 +425,9 @@ const GAME_LIBRARY = [
     id: "maptap",
     name: "MapTap",
     category: "Geography",
-    site: "Listdle",
-    domain: "listdle.com",
-    url: "https://listdle.com/games/maptap",
+    site: "MapTap",
+    domain: "maptap.gg",
+    url: "https://maptap.gg",
     resultType: "score",
     placeholder: "Optional result",
     accent: "#9cd8ff",
@@ -459,9 +459,9 @@ const GAME_LIBRARY = [
     id: "mathle",
     name: "Mathle",
     category: "Math",
-    site: "Listdle",
-    domain: "listdle.com",
-    url: "https://listdle.com/games/mathle",
+    site: "Mathle",
+    domain: "mathlegame.com",
+    url: "https://www.mathlegame.com/",
     resultType: "score",
     placeholder: "Example: 3/5",
     accent: "#ffd36e",
@@ -900,6 +900,402 @@ const GAME_LIBRARY = [
     placeholder: "Example: 5/6",
     accent: "#ff91c8",
   },
+  {
+    id: "earthle",
+    name: "Earthle",
+    category: "Geography",
+    site: "Earthle",
+    domain: "earthle.world",
+    url: "https://listdle.com/games/earthle",
+    resultType: "score",
+    placeholder: "Example: 3/6",
+    accent: "#79dfa8",
+  },
+  {
+    id: "capitalle",
+    name: "Capitalle",
+    category: "Geography",
+    site: "Capitalle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/capitalle",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#8fd3ff",
+  },
+  {
+    id: "geographly",
+    name: "Geographly",
+    category: "Geography",
+    site: "Geographly",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/geographly",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#8ee0c6",
+  },
+  {
+    id: "flagle",
+    name: "Flagle",
+    category: "Geography",
+    site: "Flagle",
+    domain: "flagle.io",
+    url: "https://listdle.com/games/flagle",
+    resultType: "score",
+    placeholder: "Example: 5/6",
+    accent: "#94c7ff",
+  },
+  {
+    id: "erapin",
+    name: "EraPin",
+    category: "Geography",
+    site: "EraPin",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/erapin",
+    resultType: "score",
+    placeholder: "Example: 18750",
+    accent: "#ffcc7a",
+  },
+  {
+    id: "whenere",
+    name: "Whenere",
+    category: "Geography",
+    site: "Whenere",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/whenere",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#b7d7ff",
+  },
+  {
+    id: "quartiles",
+    name: "Quartiles",
+    category: "Word / Guessing",
+    site: "Quartiles",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/quartiles-word",
+    resultType: "score",
+    placeholder: "Example: 142 points",
+    accent: "#ffd36e",
+  },
+  {
+    id: "minute-cryptic",
+    name: "Minute Cryptic",
+    category: "Word / Guessing",
+    site: "Minute Cryptic",
+    domain: "minutecryptic.com",
+    url: "https://listdle.com/games/minute-cryptic",
+    resultType: "time",
+    placeholder: "Example: 01:18",
+    accent: "#d3b5ff",
+  },
+  {
+    id: "betweenle",
+    name: "Betweenle",
+    category: "Word / Guessing",
+    site: "Betweenle",
+    domain: "betweenle.com",
+    url: "https://listdle.com/games/betweenle",
+    resultType: "guesses",
+    placeholder: "Example: 18 guesses",
+    accent: "#86d6ff",
+  },
+  {
+    id: "pixletters",
+    name: "Pixletters",
+    category: "Word / Guessing",
+    site: "Pixletters",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/pixletters",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ff9ac7",
+  },
+  {
+    id: "parseword",
+    name: "Parseword",
+    category: "Word / Guessing",
+    site: "Parseword",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/parseword",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#b9e59a",
+  },
+  {
+    id: "wordiply",
+    name: "Wordiply",
+    category: "Word / Guessing",
+    site: "Wordiply",
+    domain: "wordiply.com",
+    url: "https://listdle.com/games/wordiply",
+    resultType: "score",
+    placeholder: "Example: 76%",
+    accent: "#a7ccff",
+  },
+  {
+    id: "quotesed",
+    name: "Quotesed",
+    category: "Movies & TV",
+    site: "Quotesed",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/quotesed",
+    resultType: "score",
+    placeholder: "Example: 3/6",
+    accent: "#ffb26e",
+  },
+  {
+    id: "episodle",
+    name: "Episodle",
+    category: "Movies & TV",
+    site: "Episodle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/episodle",
+    resultType: "score",
+    placeholder: "Example: 4/6",
+    accent: "#a2c7ff",
+  },
+  {
+    id: "plot-hole",
+    name: "Plot-Hole",
+    category: "Movies & TV",
+    site: "Plot-Hole",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/plot-hole",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ff997a",
+  },
+  {
+    id: "filmlink",
+    name: "FilmLink",
+    category: "Movies & TV",
+    site: "FilmLink",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/filmlink",
+    resultType: "score",
+    placeholder: "Example: 4 links",
+    accent: "#cfb3ff",
+  },
+  {
+    id: "marveldle",
+    name: "Marveldle",
+    category: "Movies & TV",
+    site: "Marveldle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/marveldle",
+    resultType: "score",
+    placeholder: "Example: 5/8",
+    accent: "#ff7070",
+  },
+  {
+    id: "lostgamer",
+    name: "Lostgamer",
+    category: "Video Games",
+    site: "Lostgamer",
+    domain: "lostgamer.io",
+    url: "https://listdle.com/games/lostgamer",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#73d2ff",
+  },
+  {
+    id: "pokedoku",
+    name: "Pokedoku",
+    category: "Video Games",
+    site: "Pokedoku",
+    domain: "pokedoku.com",
+    url: "https://listdle.com/games/pokedoku",
+    resultType: "score",
+    placeholder: "Example: 8/9",
+    accent: "#ffd36e",
+  },
+  {
+    id: "wardle",
+    name: "Wardle",
+    category: "Video Games",
+    site: "Wardle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/wardle",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#91c9ff",
+  },
+  {
+    id: "immaculate-grid",
+    name: "Immaculate Grid",
+    category: "Sports",
+    site: "Sports Reference",
+    domain: "immaculategrid.com",
+    url: "https://listdle.com/games/immaculate-grid",
+    resultType: "score",
+    placeholder: "Example: 7/9",
+    accent: "#8fe3a5",
+  },
+  {
+    id: "who-are-ya",
+    name: "Who Are Ya?",
+    category: "Sports",
+    site: "Who Are Ya",
+    domain: "whoareya.io",
+    url: "https://listdle.com/games/who-are-ya",
+    resultType: "score",
+    placeholder: "Example: 4/8",
+    accent: "#75d99b",
+  },
+  {
+    id: "nfl-wordle",
+    name: "NFL Wordle",
+    category: "Sports",
+    site: "NFL Wordle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/nfl-wordle",
+    resultType: "score",
+    placeholder: "Example: 3/6",
+    accent: "#83b7ff",
+  },
+  {
+    id: "amountle",
+    name: "Amountle",
+    category: "Math",
+    site: "Amountle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/amountle",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ffd36e",
+  },
+  {
+    id: "nextup",
+    name: "NextUp",
+    category: "Math",
+    site: "NextUp",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/nextup",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#aeeaa2",
+  },
+  {
+    id: "cagey",
+    name: "Cagey",
+    category: "Math",
+    site: "Cagey",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/cagey",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#d6b5ff",
+  },
+  {
+    id: "musicle",
+    name: "Musicle",
+    category: "Music",
+    site: "Musicle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/musicle",
+    resultType: "score",
+    placeholder: "Example: 2/3",
+    accent: "#ffb3d6",
+  },
+  {
+    id: "popidle",
+    name: "PopIdle",
+    category: "Music",
+    site: "PopIdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/popidle",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#ffb980",
+  },
+  {
+    id: "songdle",
+    name: "Songdle",
+    category: "Music",
+    site: "Songdle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/songdle",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#a1d6ff",
+  },
+  {
+    id: "chess-daily",
+    name: "Chess Daily",
+    category: "Logic",
+    site: "Chess Daily",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/chess-daily",
+    resultType: "simple",
+    placeholder: "Optional result",
+    accent: "#d0d0d0",
+  },
+  {
+    id: "griductive",
+    name: "Griductive",
+    category: "Logic",
+    site: "Griductive",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/griductive",
+    resultType: "simple",
+    placeholder: "Optional result",
+    accent: "#8fd3ff",
+  },
+  {
+    id: "daily-sleuth",
+    name: "Daily Sleuth",
+    category: "Logic",
+    site: "Daily Sleuth",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/daily-sleuth",
+    resultType: "simple",
+    placeholder: "Optional result",
+    accent: "#cc8cff",
+  },
+  {
+    id: "redacted",
+    name: "Redacted",
+    category: "Logic",
+    site: "Redacted",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/redacted",
+    resultType: "simple",
+    placeholder: "Optional result",
+    accent: "#ff7f8b",
+  },
+  {
+    id: "brandle",
+    name: "Brandle",
+    category: "Visual / Logic",
+    site: "Brandle",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/brandle",
+    resultType: "score",
+    placeholder: "Example: 4/8",
+    accent: "#ffd36e",
+  },
+  {
+    id: "where-spoken",
+    name: "WhereSpoken",
+    category: "Other",
+    site: "WhereSpoken",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/wherespoken",
+    resultType: "score",
+    placeholder: "Optional result",
+    accent: "#91c9ff",
+  },
+  {
+    id: "daily-jig",
+    name: "Daily Jig",
+    category: "Other",
+    site: "Daily Jig",
+    domain: "listdle.com",
+    url: "https://listdle.com/games/daily-jig",
+    resultType: "time",
+    placeholder: "Example: 04:40",
+    accent: "#ffd36e",
+  },
 ];
 
 const DEFAULT_SELECTED = [
@@ -909,8 +1305,9 @@ const DEFAULT_SELECTED = [
   "pips",
   "contexto",
 ];
-const STORAGE_KEY = "dailyhub-v4-state";
+const STORAGE_KEY = "dailyhub-v5-state";
 const LEGACY_KEYS = [
+  "dailyhub-v4-state",
   "dailyhub-v3-state",
   "dailyhub-v2-state",
   "dailyhub-state",
@@ -928,10 +1325,15 @@ calendarCursor.setHours(12, 0, 0, 0);
 let allGames = dedupeGames([...GAME_LIBRARY, ...state.customGames]);
 
 function dedupeGames(games) {
-  const seen = new Set();
+  const seenIds = new Set();
+  const seenNames = new Set();
   return games.filter((game) => {
-    if (seen.has(game.id)) return false;
-    seen.add(game.id);
+    const normalizedName = (game.name || game.id)
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "");
+    if (seenIds.has(game.id) || seenNames.has(normalizedName)) return false;
+    seenIds.add(game.id);
+    seenNames.add(normalizedName);
     return true;
   });
 }
@@ -1019,6 +1421,22 @@ function gameById(id) {
     }
   );
 }
+function categoryIcon(game) {
+  const category = (game.category || "").toLowerCase();
+  if (category.includes("nyt")) return "T";
+  if (category.includes("linkedin")) return "in";
+  if (category.includes("word")) return "Aa";
+  if (category.includes("geography")) return "🌍";
+  if (category.includes("music")) return "♪";
+  if (category.includes("movie")) return "🎬";
+  if (category.includes("video")) return "🎮";
+  if (category.includes("sport")) return "🏆";
+  if (category.includes("math")) return "#";
+  if (category.includes("quiz")) return "?";
+  if (category.includes("logic") || category.includes("visual")) return "◇";
+  return (game.name || "?").slice(0, 2).toUpperCase();
+}
+
 function getGoal(total, mode = state.goalMode) {
   if (!total) return 0;
   if (mode === "strict") return total;
@@ -1048,12 +1466,8 @@ function dayStats(key = TODAY_KEY) {
 function logoFor(game, size = "") {
   const domain = game.domain || domainFromUrl(game.url);
   const favicon = `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(domain)}`;
-  const initials =
-    (game.site || game.name || "?")
-      .replace(/[^A-Za-z0-9]/g, "")
-      .slice(0, 2)
-      .toUpperCase() || "?";
-  return `<span class="site-logo ${size}" title="${escapeHtml(game.site || game.name)}" data-initials="${escapeHtml(initials)}"><img src="${favicon}" alt="" loading="lazy" onerror="this.remove();this.parentElement.textContent=this.parentElement.dataset.initials"></span>`;
+  const fallback = categoryIcon(game);
+  return `<span class="site-logo ${size}" title="${escapeHtml(game.site || game.name)}" data-fallback="${escapeHtml(fallback)}"><span class="logo-fallback">${escapeHtml(fallback)}</span><img src="${favicon}" alt="" loading="lazy" onerror="this.remove();this.parentElement.classList.add('no-img')"></span>`;
 }
 function formatDate(key, long = false) {
   const date = fromKey(key);
@@ -1158,13 +1572,14 @@ function renderTodayGames() {
   container.innerHTML = "";
   empty.classList.toggle("hidden", selectedGames().length > 0);
 
-  games.forEach((game) => {
+  games.forEach((game, index) => {
     const done = Boolean(day.completed[game.id]);
     const value = day.results[game.id] || "";
     const card = document.createElement("article");
-    card.className = `game-card ${done ? "done" : ""}`;
+    card.className = `game-card roadmap-card ${done ? "done" : ""}`;
     card.style.setProperty("--accent", game.accent || "#ffd36e");
     card.innerHTML = `
+      <div class="step-badge" aria-hidden="true">${index + 1}</div>
       <div class="game-top">
         <div class="game-title-row">
           ${logoFor(game)}
@@ -1173,15 +1588,19 @@ function renderTodayGames() {
             <span class="game-category">${escapeHtml(game.category)}</span>
           </span>
         </div>
-        <span class="status-pill ${done ? "done" : ""}">${done ? "Done" : escapeHtml(game.site || "Open")}</span>
+        <span class="status-pill ${done ? "done" : ""}">${done ? "Completed" : escapeHtml(game.site || "Open")}</span>
       </div>
+      ${done ? `<div class="complete-strip"><span>✓ Complete</span>${value ? `<strong>${escapeHtml(value)}</strong>` : `<small>No result saved</small>`}</div>` : ""}
       <div class="result-wrap">
         <label for="result-${escapeHtml(game.id)}">Result</label>
-        <input id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" placeholder="${escapeHtml(game.placeholder || "Optional result")}" value="${escapeHtml(value)}" />
+        <div class="result-line">
+          <input id="result-${escapeHtml(game.id)}" data-result="${escapeHtml(game.id)}" placeholder="${escapeHtml(game.placeholder || "Paste or type result")}" value="${escapeHtml(value)}" />
+          <button class="paste-btn" type="button" data-paste="${escapeHtml(game.id)}" title="Paste copied result">Paste</button>
+        </div>
       </div>
       <div class="game-actions">
-        <a class="play-link" href="${escapeHtml(game.url)}" target="_blank" rel="noopener noreferrer">Play</a>
-        <button class="done-btn ${done ? "is-done" : ""}" data-done="${escapeHtml(game.id)}">${done ? "Undo" : "Mark done"}</button>
+        <a class="play-link" href="${escapeHtml(game.url)}" target="_blank" rel="noopener noreferrer"><span>▶</span> Play</a>
+        <button class="done-btn ${done ? "is-done" : ""}" data-done="${escapeHtml(game.id)}">${done ? "Undo" : "Mark complete"}</button>
       </div>`;
     container.appendChild(card);
   });
@@ -1196,6 +1615,25 @@ function renderTodayGames() {
       saveState();
       renderCalendar();
       renderSelectedDay();
+    }),
+  );
+  $$("[data-paste]").forEach((button) =>
+    button.addEventListener("click", async () => {
+      const id = button.dataset.paste;
+      try {
+        const text = await navigator.clipboard.readText();
+        if (!text.trim()) return toast("Clipboard is empty");
+        const day = getDay();
+        day.selectedSnapshot = [...state.selectedGames];
+        day.goalMode = state.goalMode;
+        day.results[id] = text.trim();
+        day.completed[id] = true;
+        saveState();
+        renderAll();
+        toast("Result pasted and marked complete");
+      } catch {
+        toast("Paste is blocked. Click the result field and press Ctrl+V.");
+      }
     }),
   );
   $$("[data-done]").forEach((button) =>
@@ -1321,7 +1759,10 @@ function renderLibrary() {
     )
     .sort(
       (a, b) =>
-        a.category.localeCompare(b.category) || a.name.localeCompare(b.name),
+        Number(state.selectedGames.includes(b.id)) -
+          Number(state.selectedGames.includes(a.id)) ||
+        a.category.localeCompare(b.category) ||
+        a.name.localeCompare(b.name),
     );
 
   list.innerHTML =
