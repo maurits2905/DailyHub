@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111827" />
+  <title>Daily Puzzle Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="app-shell">
+    <header class="hero">
+      <nav class="topbar" aria-label="Main navigation">
+        <div class="brand">
+          <div class="brand-mark">✦</div>
+          <div>
+            <p class="eyebrow">Daily ritual</p>
+            <h1>Daily Puzzle Hub</h1>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-btn" id="settingsBtn" type="button">Games</button>
+          <button class="ghost-btn" id="summaryBtn" type="button">Summary</button>
+          <button class="ghost-btn danger-soft" id="resetTodayBtn" type="button">Reset today</button>
+        </div>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="date-pill" id="dateLabel">Today</p>
+          <h2 id="greeting">Good morning</h2>
+          <p class="hero-text">Choose the daily games you actually play, track today’s run, keep your streaks, and build a small history of your puzzle habit.</p>
+          <div class="hero-buttons">
+            <button class="primary-btn" id="startNextBtn" type="button">Play next game</button>
+            <button class="secondary-btn" id="customGameBtn" type="button">Add custom game</button>
+          </div>
+        </div>
+
+        <aside class="progress-card" aria-label="Daily progress">
+          <div class="progress-top">
+            <div>
+              <p class="eyebrow">Today</p>
+              <h3 id="progressTitle">0 / 0 done</h3>
+            </div>
+            <div class="score-orb" id="progressPercent">0%</div>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="goal-row">
+            <span id="goalStatus">Select games to begin</span>
+            <span id="goalModeLabel">Flexible goal</span>
+          </div>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="stats-grid" aria-label="Stats">
+        <article class="stat-card">
+          <span>🔥</span>
+          <div>
+            <p>Current streak</p>
+            <strong id="currentStreak">0 days</strong>
+          </div>
+        </article>
+        <article class="stat-card">
+          <span>🏆</span>
+          <div>
+            <p>Best streak</p>
+            <strong id="bestStreak">0 days</strong>
+          </div>
+        </article>
+        <article class="stat-card">
+          <span>📅</span>
+          <div>
+            <p>Tracked days</p>
+            <strong id="trackedDays">0</strong>
+          </div>
+        </article>
+        <article class="stat-card">
+          <span>🎯</span>
+          <div>
+            <p>Goal mode</p>
+            <select id="goalMode" aria-label="Goal mode">
+              <option value="strict">Strict: all games</option>
+              <option value="flexible">Flexible: 80%</option>
+              <option value="relaxed">Relaxed: one game</option>
+            </select>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-head">
+        <div>
+          <p class="eyebrow">Next up</p>
+          <h2>Today’s run</h2>
+        </div>
+        <div class="view-filters" role="group" aria-label="Filter games">
+          <button class="chip active" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="open" type="button">Left</button>
+          <button class="chip" data-filter="done" type="button">Done</button>
+        </div>
+      </section>
+
+      <section class="game-grid" id="selectedGames" aria-live="polite"></section>
+
+      <section class="panel two-col">
+        <div>
+          <div class="section-head compact">
+            <div>
+              <p class="eyebrow">History</p>
+              <h2>Last 28 days</h2>
+            </div>
+          </div>
+          <div class="heatmap" id="heatmap" aria-label="Completion history"></div>
+        </div>
+        <div class="notes-panel">
+          <label for="dailyNote">Today’s note</label>
+          <textarea id="dailyNote" rows="7" placeholder="Example: Wordle was easy. Strands theme was annoying."></textarea>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="libraryDialog" class="modal">
+    <div class="modal-card wide">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Game library</p>
+          <h2>Choose what counts</h2>
+        </div>
+        <button class="icon-btn" id="closeLibraryBtn" aria-label="Close games modal" type="button">×</button>
+      </div>
+      <p class="muted">Only selected games count towards your progress and streak. Unselected games never punish you.</p>
+      <div class="library-toolbar">
+        <input id="searchGames" type="search" placeholder="Search games..." />
+        <button class="secondary-btn" id="selectSuggestedBtn" type="button">Select suggested</button>
+      </div>
+      <div class="library-list" id="libraryList"></div>
+    </div>
+  </dialog>
+
+  <dialog id="customDialog" class="modal">
+    <form class="modal-card" id="customGameForm" method="dialog">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Custom game</p>
+          <h2>Add your own</h2>
+        </div>
+        <button class="icon-btn" id="closeCustomBtn" aria-label="Close custom game modal" type="button">×</button>
+      </div>
+      <label>Name <input id="customName" required placeholder="Example: Mini Crossword" /></label>
+      <label>URL <input id="customUrl" required type="url" placeholder="https://..." /></label>
+      <label>Category <input id="customCategory" placeholder="Custom" /></label>
+      <label>Result type
+        <select id="customResultType">
+          <option value="simple">Simple done</option>
+          <option value="score">Score</option>
+          <option value="guesses">Guesses</option>
+          <option value="mistakes">Mistakes</option>
+          <option value="moves">Moves</option>
+          <option value="time">Time</option>
+        </select>
+      </label>
+      <button class="primary-btn" type="submit">Add game</button>
+    </form>
+  </dialog>
+
+  <dialog id="summaryDialog" class="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Daily recap</p>
+          <h2>Copy summary</h2>
+        </div>
+        <button class="icon-btn" id="closeSummaryBtn" aria-label="Close summary modal" type="button">×</button>
+      </div>
+      <textarea id="summaryText" rows="12" readonly></textarea>
+      <button class="primary-btn" id="copySummaryBtn" type="button">Copy summary</button>
+      <p class="toast" id="copyToast" role="status" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
