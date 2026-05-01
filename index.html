@@ -28,7 +28,6 @@
         </a>
 
         <nav class="top-actions" aria-label="Primary actions">
-          <button class="ghost" id="open-about">About</button>
           <button class="ghost" data-scroll="dashboard">Home</button>
           <button class="ghost" id="open-library">Games</button>
           <button class="ghost" data-scroll="calendar">Calendar</button>
@@ -313,47 +312,7 @@
           <button class="btn primary compact" id="copy-summary">
             Copy summary
           </button>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="modal-backdrop hidden"
-      id="about-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="about-title"
-    >
-      <div class="modal about-card">
-        <div class="modal-head">
-          <div>
-            <span class="kicker">About DailyHub</span>
-            <h2 id="about-title">Made for Maurits</h2>
-            <p>
-              DailyHub is a personal puzzle dashboard for collecting your daily
-              games in one place.
-            </p>
-          </div>
-          <button
-            class="icon-btn close-btn"
-            id="close-about"
-            aria-label="Close about"
-          >
-            ×
-          </button>
-        </div>
-        <div class="about-body">
-          <p>
-            <strong>What it does:</strong> choose the games you actually play,
-            open the next unfinished game, paste share results, track
-            completion, and keep a calendar of your puzzle routine.
-          </p>
-          <p>
-            Your progress is saved locally in this browser with
-            <code>localStorage</code>. There is no backend, login, account,
-            database, or tracking.
-          </p>
-          <p>It runs directly on GitHub Pages as a simple static website.</p>
+          <span class="copy-status" id="copy-status" aria-live="polite"></span>
         </div>
       </div>
     </div>

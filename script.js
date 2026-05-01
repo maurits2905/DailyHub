@@ -2092,12 +2092,6 @@ function bindEvents() {
   $("#close-summary").addEventListener("click", () =>
     $("#summary-modal").classList.add("hidden"),
   );
-  $("#open-about")?.addEventListener("click", () =>
-    $("#about-modal").classList.remove("hidden"),
-  );
-  $("#close-about")?.addEventListener("click", () =>
-    $("#about-modal").classList.add("hidden"),
-  );
   $("#close-perfect")?.addEventListener("click", () =>
     $("#perfect-modal").classList.add("hidden"),
   );
@@ -2109,12 +2103,21 @@ function bindEvents() {
   $("#open-all-left").addEventListener("click", openAllLeft);
   function copiedFeedback(button, label = "Copied ✓") {
     const original = button.textContent;
+    const status = $("#copy-status");
     button.textContent = label;
     button.classList.add("copied");
+    if (status) {
+      status.textContent = "Copied to clipboard";
+      status.classList.add("show");
+    }
     setTimeout(() => {
       button.textContent = original;
       button.classList.remove("copied");
-    }, 1400);
+      if (status) {
+        status.textContent = "";
+        status.classList.remove("show");
+      }
+    }, 1800);
   }
   $("#copy-summary").addEventListener("click", async (event) => {
     try {
