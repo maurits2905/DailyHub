@@ -2050,3 +2050,136 @@ main {
     align-items: flex-start;
   }
 }
+
+/* v8 polish: remove goal/footer blocks, cleaner share, better type and more colourful run cards */
+.app {
+  margin-bottom: 44px;
+}
+.quick-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.hero h1 {
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  font-size: clamp(3.8rem, 7.4vw, 6.25rem);
+  font-kerning: normal;
+  text-rendering: geometricPrecision;
+}
+.hero-text {
+  max-width: 610px;
+}
+.today-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(99, 130, 255, 0.12)
+  );
+}
+
+.share-link-card {
+  display: none !important;
+}
+.summary-card {
+  width: min(650px, 100%);
+}
+.summary-card textarea {
+  margin: 0 24px 18px;
+  width: calc(100% - 48px);
+  min-height: 330px;
+  max-height: 50vh;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.075);
+}
+.summary-actions {
+  padding-top: 0;
+}
+
+.status-pill.done,
+.game-card.done .status-pill.done {
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.game-card {
+  border-color: color-mix(
+    in srgb,
+    var(--accent, #ffd36e) 28%,
+    rgba(255, 255, 255, 0.16)
+  );
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      color-mix(in srgb, var(--accent, #ffd36e) 38%, transparent),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      color-mix(in srgb, var(--accent, #91c9ff) 26%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.11),
+      rgba(255, 255, 255, 0.045) 58%
+    ),
+    rgba(18, 22, 36, 0.74);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+.game-card:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--accent, #ffd36e) 55%,
+    rgba(255, 255, 255, 0.2)
+  );
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.32),
+    0 0 0 1px color-mix(in srgb, var(--accent, #ffd36e) 18%, transparent);
+}
+.game-card.done {
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(137, 229, 165, 0.34),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      color-mix(in srgb, var(--accent, #ffd36e) 20%, transparent),
+      transparent 44%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(137, 229, 165, 0.15),
+      rgba(255, 255, 255, 0.055)
+    ),
+    rgba(18, 22, 36, 0.78);
+}
+.complete-strip {
+  background: linear-gradient(
+    135deg,
+    rgba(137, 229, 165, 0.22),
+    rgba(137, 229, 165, 0.09)
+  );
+}
+.close-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+}
+.site-footer {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: clamp(3.2rem, 13vw, 5rem);
+    letter-spacing: -0.04em;
+  }
+}

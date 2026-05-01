@@ -1601,7 +1601,7 @@ function renderTodayGames() {
             <span class="game-category">${escapeHtml(game.category)}</span>
           </span>
         </div>
-        <span class="status-pill ${done ? "done" : ""}">${done ? "Completed" : escapeHtml(game.site || "Open")}</span>
+        <span class="status-pill ${done ? "done" : ""}">${escapeHtml(game.site || "Open")}</span>
       </div>
       ${
         done
@@ -1894,7 +1894,7 @@ function buildSummary() {
     `Goal: all ${stats.total} selected game${stats.total === 1 ? "" : "s"}`,
   );
   lines.push(`Progress: ${stats.percent}%`);
-  lines.push(`Open DailyHub: ${dailyHubLink()}`);
+  lines.push(`DailyHub: ${dailyHubLink()}`);
   lines.push("");
   selectedGames().forEach((game) => {
     const done = day.completed[game.id] ? "✅" : "⬜";
@@ -1906,11 +1906,6 @@ function buildSummary() {
 function openSummary() {
   const link = dailyHubLink();
   $("#summary-text").value = buildSummary();
-  const linkEl = $("#share-link");
-  if (linkEl) {
-    linkEl.href = link;
-    linkEl.textContent = link;
-  }
   $("#summary-modal").classList.remove("hidden");
 }
 function renderAll() {
@@ -1945,15 +1940,11 @@ function bindEvents() {
       target?.scrollIntoView({ behavior: "smooth", block: "start" });
     }),
   );
-  [
-    "#open-library",
-    "#open-library-hero",
-    "#empty-open-library",
-    "#footer-open-library",
-  ].forEach((selector) =>
-    $(selector)?.addEventListener("click", () =>
-      $("#library-modal").classList.remove("hidden"),
-    ),
+  ["#open-library", "#open-library-hero", "#empty-open-library"].forEach(
+    (selector) =>
+      $(selector)?.addEventListener("click", () =>
+        $("#library-modal").classList.remove("hidden"),
+      ),
   );
   $("#close-library").addEventListener("click", () =>
     $("#library-modal").classList.add("hidden"),
