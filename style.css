@@ -1525,3 +1525,222 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/* v6 polish: cleaner roadmap, fixed play button, celebrations */
+.play-link::before {
+  content: none !important;
+  display: none !important;
+}
+.run-section {
+  position: relative;
+}
+.game-grid {
+  align-items: stretch;
+}
+.roadmap-card {
+  min-height: 206px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 12px;
+  border-radius: 22px;
+}
+.step-badge {
+  right: 14px;
+  bottom: 14px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.85rem;
+  opacity: 0.78;
+}
+.game-card.done {
+  transform: none;
+  border-color: rgba(137, 229, 165, 0.7);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(137, 229, 165, 0.19),
+      rgba(255, 255, 255, 0.055) 48%,
+      rgba(54, 223, 128, 0.08)
+    ),
+    var(--panel-2);
+}
+.game-card.done:hover {
+  transform: translateY(-3px);
+}
+.game-card.done .complete-strip {
+  box-shadow:
+    inset 0 0 0 1px rgba(137, 229, 165, 0.18),
+    0 12px 28px rgba(58, 220, 120, 0.08);
+}
+.game-card.done .result-wrap label::after {
+  content: " · saved";
+  color: var(--green);
+}
+.play-link {
+  position: relative;
+  overflow: hidden;
+  min-width: 92px;
+}
+.play-link::after {
+  content: "";
+  position: absolute;
+  inset: -80% auto -80% -40%;
+  width: 36%;
+  transform: rotate(18deg) translateX(-120%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  transition: transform 0.45s ease;
+}
+.play-link:hover::after {
+  transform: rotate(18deg) translateX(430%);
+}
+.done-btn.is-done {
+  box-shadow: 0 12px 26px rgba(137, 229, 165, 0.18);
+}
+.library-modal-card {
+  max-height: min(90vh, 920px);
+}
+.library-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 160;
+}
+.confetti-piece {
+  position: absolute;
+  top: -24px;
+  display: block;
+  opacity: 0.98;
+  transform: translate3d(0, 0, 0) rotate(0deg);
+  animation: confetti-fall var(--d, 1.8s) cubic-bezier(0.15, 0.55, 0.28, 1)
+    forwards;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--x, 0), 112vh, 0) rotate(var(--r, 360deg));
+    opacity: 0;
+  }
+}
+.celebration-pop {
+  position: fixed;
+  left: 50%;
+  top: 18%;
+  transform: translate(-50%, -50%) scale(0.92);
+  padding: 16px 24px;
+  border-radius: 999px;
+  color: #171219;
+  font-weight: 1000;
+  letter-spacing: -0.04em;
+  font-size: clamp(1.25rem, 4vw, 2.4rem);
+  background: linear-gradient(135deg, #fff2bd, #ffd36e 70%);
+  box-shadow: 0 24px 70px rgba(255, 211, 110, 0.28);
+  animation: pop-toast 1.6s ease forwards;
+}
+@keyframes pop-toast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.75);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  78% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -66%) scale(0.96);
+  }
+}
+.perfect-card {
+  position: relative;
+  width: min(680px, 100%);
+  padding: 42px;
+  text-align: center;
+  overflow: hidden;
+  border-color: rgba(255, 211, 110, 0.36);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 211, 110, 0.26),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 12% 80%,
+      rgba(137, 229, 165, 0.18),
+      transparent 38%
+    ),
+    rgba(20, 23, 36, 0.98);
+}
+.perfect-card h2 {
+  margin: 8px 0 10px;
+  font-size: clamp(3.3rem, 8vw, 6rem);
+  line-height: 0.86;
+  letter-spacing: -0.08em;
+}
+.perfect-card p {
+  max-width: 520px;
+  margin: 0 auto 26px;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.6;
+}
+.perfect-glow {
+  width: 86px;
+  height: 86px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 28px;
+  color: #171219;
+  background: linear-gradient(135deg, #fff1b8, #ffd36e);
+  box-shadow: 0 0 60px rgba(255, 211, 110, 0.35);
+  font-size: 2.5rem;
+  animation: glow-pulse 1.7s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  50% {
+    transform: scale(1.05) rotate(4deg);
+    box-shadow: 0 0 90px rgba(255, 211, 110, 0.48);
+  }
+}
+.perfect-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+.perfect-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece,
+  .celebration-pop,
+  .perfect-glow,
+  .play-link::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

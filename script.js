@@ -1305,8 +1305,9 @@ const DEFAULT_SELECTED = [
   "pips",
   "contexto",
 ];
-const STORAGE_KEY = "dailyhub-v5-state";
+const STORAGE_KEY = "dailyhub-v6-state";
 const LEGACY_KEYS = [
+  "dailyhub-v5-state",
   "dailyhub-v4-state",
   "dailyhub-v3-state",
   "dailyhub-v2-state",
@@ -1465,9 +1466,16 @@ function dayStats(key = TODAY_KEY) {
 }
 function logoFor(game, size = "") {
   const domain = game.domain || domainFromUrl(game.url);
-  const favicon = `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(domain)}`;
   const fallback = categoryIcon(game);
-  return `<span class="site-logo ${size}" title="${escapeHtml(game.site || game.name)}" data-fallback="${escapeHtml(fallback)}"><span class="logo-fallback">${escapeHtml(fallback)}</span><img src="${favicon}" alt="" loading="lazy" onerror="this.remove();this.parentElement.classList.add('no-img')"></span>`;
+  const special = {
+    "nytimes.com": "https://www.nytimes.com/favicon.ico",
+    "linkedin.com": "https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca",
+    "listdle.com": "https://listdle.com/favicon.ico",
+  };
+  const favicon =
+    special[domain] ||
+    `https://www.google.com/s2/favicons?sz=64&domain=${encodeURIComponent(domain)}`;
+  return `<span class="site-logo ${size}" title="${escapeHtml(game.site || game.name)}" data-fallback="${escapeHtml(fallback)}"><span class="logo-fallback">${escapeHtml(fallback)}</span><img src="${favicon}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove();this.parentElement.classList.add('no-img')"></span>`;
 }
 function formatDate(key, long = false) {
   const date = fromKey(key);
@@ -1590,7 +1598,7 @@ function renderTodayGames() {
         </div>
         <span class="status-pill ${done ? "done" : ""}">${done ? "Completed" : escapeHtml(game.site || "Open")}</span>
       </div>
-      ${done ? `<div class="complete-strip"><span>✓ Complete</span>${value ? `<strong>${escapeHtml(value)}</strong>` : `<small>No result saved</small>`}</div>` : ""}
+      ${done ? `<div class="complete-strip"><span>✓ Completed</span>${value ? `<strong>${escapeHtml(value)}</strong>` : `<small>No result saved</small>`}</div>` : ""}
       <div class="result-wrap">
         <label for="result-${escapeHtml(game.id)}">Result</label>
         <div class="result-line">
@@ -1627,9 +1635,8 @@ function renderTodayGames() {
         day.selectedSnapshot = [...state.selectedGames];
         day.goalMode = state.goalMode;
         day.results[id] = text.trim();
-        day.completed[id] = true;
         saveState();
-        renderAll();
+        updateCompletion(id, true);
         toast("Result pasted and marked complete");
       } catch {
         toast("Paste is blocked. Click the result field and press Ctrl+V.");
@@ -1641,9 +1648,8 @@ function renderTodayGames() {
       const day = getDay();
       day.selectedSnapshot = [...state.selectedGames];
       day.goalMode = state.goalMode;
-      day.completed[button.dataset.done] = !day.completed[button.dataset.done];
-      saveState();
-      renderAll();
+      const id = button.dataset.done;
+      updateCompletion(id, !day.completed[id]);
     }),
   );
 }
@@ -1801,6 +1807,73 @@ function renderLibrary() {
     }),
   );
 }
+function dailyHubLink() {
+  if (location.protocol === "http:" || location.protocol === "https:")
+    return location.origin + location.pathname;
+  return "https://maurits2905.github.io/DailyHub/";
+}
+function celebrateGameComplete() {
+  launchConfetti({ count: 58, power: 1, text: "Nice!" });
+}
+function celebratePerfectRun() {
+  launchConfetti({ count: 190, power: 1.7, text: "Perfect run!" });
+  const overlay = $("#perfect-modal");
+  if (overlay) overlay.classList.remove("hidden");
+}
+function launchConfetti({ count = 80, power = 1, text = "" } = {}) {
+  const layer = $("#confetti-layer");
+  if (!layer) return;
+  const colors = [
+    "#ffd36e",
+    "#89e5a5",
+    "#8fd3ff",
+    "#ff8fd8",
+    "#ffffff",
+    "#b39ddb",
+  ];
+  for (let i = 0; i < count; i++) {
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.setProperty("--x", `${(Math.random() - 0.5) * 560 * power}px`);
+    piece.style.setProperty("--r", `${(Math.random() * 720 - 360) * power}deg`);
+    piece.style.setProperty("--d", `${1.1 + Math.random() * 1.35}s`);
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = `${6 + Math.random() * 9}px`;
+    piece.style.height = `${8 + Math.random() * 16}px`;
+    piece.style.borderRadius = Math.random() > 0.55 ? "999px" : "4px";
+    layer.appendChild(piece);
+    setTimeout(() => piece.remove(), 3000);
+  }
+  if (text) {
+    const pop = document.createElement("div");
+    pop.className = "celebration-pop";
+    pop.textContent = text;
+    layer.appendChild(pop);
+    setTimeout(() => pop.remove(), 1700);
+  }
+}
+function updateCompletion(id, completed) {
+  const before = dayStats();
+  const day = getDay();
+  const wasDone = Boolean(day.completed[id]);
+  day.selectedSnapshot = [...state.selectedGames];
+  day.goalMode = state.goalMode;
+  day.completed[id] = completed;
+  saveState();
+  const after = dayStats();
+  renderAll();
+  if (!wasDone && completed) {
+    if (
+      after.total > 0 &&
+      after.completed === after.total &&
+      before.completed < before.total
+    )
+      celebratePerfectRun();
+    else celebrateGameComplete();
+  }
+}
+
 function buildSummary() {
   const stats = dayStats();
   const day = getDay();
@@ -1812,6 +1885,7 @@ function buildSummary() {
     `Goal: ${state.goalMode === "strict" ? "Strict" : state.goalMode === "relaxed" ? "Relaxed" : "Flexible"}`,
   );
   lines.push(`Progress: ${stats.percent}%`);
+  lines.push(`DailyHub: ${dailyHubLink()}`);
   lines.push("");
   selectedGames().forEach((game) => {
     const done = day.completed[game.id] ? "✅" : "⬜";
@@ -1871,6 +1945,13 @@ function bindEvents() {
   $("#close-summary").addEventListener("click", () =>
     $("#summary-modal").classList.add("hidden"),
   );
+  $("#close-perfect")?.addEventListener("click", () =>
+    $("#perfect-modal").classList.add("hidden"),
+  );
+  $("#perfect-share")?.addEventListener("click", () => {
+    $("#perfect-modal").classList.add("hidden");
+    openSummary();
+  });
   $("#play-next").addEventListener("click", playNext);
   $("#open-all-left").addEventListener("click", openAllLeft);
   $("#copy-summary").addEventListener("click", async () => {

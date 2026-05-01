@@ -320,6 +320,44 @@
     </div>
 
     <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+
+    <div
+      class="modal-backdrop hidden"
+      id="perfect-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="perfect-title"
+    >
+      <div class="modal perfect-card">
+        <button
+          class="icon-btn close-btn perfect-close"
+          id="close-perfect"
+          aria-label="Close celebration"
+        >
+          ×
+        </button>
+        <div class="perfect-glow" aria-hidden="true">✦</div>
+        <span class="kicker">Daily run complete</span>
+        <h2 id="perfect-title">Perfect run</h2>
+        <p>
+          You cleared every selected game for today. That deserves a proper
+          little dopamine hit.
+        </p>
+        <div class="perfect-actions">
+          <button class="btn primary" id="perfect-share">Share run</button>
+          <button
+            class="btn soft"
+            id="close-perfect-secondary"
+            onclick="
+              document.getElementById('perfect-modal').classList.add('hidden')
+            "
+          >
+            Nice
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
