@@ -1817,36 +1817,71 @@ function renderLibrary() {
   );
 }
 
+function isEmojiBoardLine(line) {
+  const clean = String(line || "").trim();
+  if (!clean) return false;
+  if (/[A-Za-zÆØÅæøå]/.test(clean)) return false;
+  if (/https?:\/\/|www\.|\.com|\.net|\.dk|lnkd\.in/i.test(clean)) return false;
+  const emojiMatches =
+    clean.match(/[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤⭐★☆👑🛑🧶🏁🔥]|[0-9]️⃣/g) ||
+    [];
+  const allowed = clean.replace(
+    /[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤⭐★☆👑🛑🧶🏁🔥]|[0-9]️⃣|\s|\|/g,
+    "",
+  );
+  return emojiMatches.length >= 2 && allowed.length === 0;
+}
+function extractScore(text, game = {}, lines = []) {
+  const scoreMatch = text.match(/(?:^|\s)([xX\d]+\s*\/\s*\d+)(?:\s|$)/);
+  const puzzleMatch = text.match(/Puzzle\s*#?\s*([\d.,]+)/i);
+  const hashMatch = text.match(/#\s*([\w-]*\d[\w-]*)/i);
+  const timeMatch = text.match(/\b(\d{1,2}:\d{2})\b/);
+  const guessMatch = text.match(/(\d+)\s*(?:guesses|guess)/i);
+  const percentMatch = text.match(/\b(\d{1,3})%\b/);
+  if (scoreMatch) return scoreMatch[1].replace(/\s+/g, "");
+  if (puzzleMatch) return `Puzzle #${puzzleMatch[1]}`;
+  if (hashMatch && timeMatch) return `#${hashMatch[1]} · ${timeMatch[1]}`;
+  if (hashMatch) return `#${hashMatch[1]}`;
+  if (guessMatch) return `${guessMatch[1]} guesses`;
+  if (timeMatch) return timeMatch[1];
+  if (percentMatch) return `${percentMatch[1]}%`;
+  const firstUseful = lines.find(
+    (line) =>
+      line &&
+      !isEmojiBoardLine(line) &&
+      !/https?:\/\/|www\.|\.com|\.net|\.dk|lnkd\.in/i.test(line),
+  );
+  return firstUseful && firstUseful.length <= 42 ? firstUseful : "Saved result";
+}
 function parseSharedResult(raw, game = {}) {
   const text = String(raw || "")
     .replace(/\r\n/g, "\n")
     .trim();
-  if (!text) return { raw: "", label: "", grid: [], hasShareBlock: false };
+  if (!text)
+    return {
+      raw: "",
+      label: "",
+      grid: [],
+      hasShareBlock: false,
+      compactLines: [],
+    };
   const lines = text
     .split("\n")
     .map((line) => line.trimEnd())
     .filter((line) => line.trim().length);
-  const grid = lines.filter(
-    (line) =>
-      /^[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤\s]+$/u.test(line.trim()) &&
-      /[⬛⬜🟩🟨🟦🟪🟥🟧🟫🟠🟡🟢🔵🟣⚫⚪🟤]/u.test(line),
-  );
-  const scoreMatch = text.match(/(?:^|\s)([xX\d]+\s*\/\s*\d+)(?:\s|$)/);
-  const puzzleMatch = text.match(/Puzzle\s*#?\s*([\d.,]+)/i);
-  const guessMatch = text.match(/(\d+)\s*(?:guesses|guess)/i);
-  const timeMatch = text.match(/\b(\d{1,2}:\d{2})\b/);
-  let label = "";
-  if (scoreMatch) label = scoreMatch[1].replace(/\s+/g, "");
-  else if (guessMatch) label = `${guessMatch[1]} guesses`;
-  else if (timeMatch) label = timeMatch[1];
-  else if (puzzleMatch && grid.length) label = `Puzzle #${puzzleMatch[1]}`;
-  else if (lines[0] && lines[0].length <= 40) label = lines[0];
-  else label = "Saved result";
+  const grid = lines.filter(isEmojiBoardLine);
+  const label = extractScore(text, game, lines);
+  const compactLines = [];
+  if (label && label !== "Saved result") compactLines.push(label);
+  grid.forEach((line) => compactLines.push(line.trim()));
+  if (!grid.length && label === "Saved result" && lines[0])
+    compactLines.push(lines[0].slice(0, 80));
   return {
     raw: text,
     label,
     grid,
     hasShareBlock: lines.length > 1 || grid.length > 0,
+    compactLines,
   };
 }
 function resultLabel(raw, game) {
@@ -1855,19 +1890,27 @@ function resultLabel(raw, game) {
 function resultPreviewHtml(raw, game) {
   const parsed = parseSharedResult(raw, game);
   if (!parsed.raw) return "";
-  const lines = parsed.raw.split("\n").filter((line) => line.trim().length);
-  if (parsed.grid.length) {
-    const titleLines = lines
-      .filter((line) => !parsed.grid.includes(line))
-      .slice(0, 2);
-    return `<div class="share-preview">${titleLines.length ? `<div class="share-preview-title">${titleLines.map(escapeHtml).join("<br>")}</div>` : ""}<pre>${escapeHtml(parsed.grid.join("\n"))}</pre></div>`;
+  const grid = parsed.grid;
+  const label = parsed.label;
+  if (grid.length) {
+    return `<div class="share-preview compact-preview">${label ? `<div class="share-preview-title">${escapeHtml(label)}</div>` : ""}<pre>${escapeHtml(grid.join("\n"))}</pre></div>`;
   }
-  if (parsed.hasShareBlock) {
-    return `<div class="share-preview text-only">${lines.slice(0, 4).map(escapeHtml).join("<br>")}</div>`;
+  if (label && label !== "Saved result") {
+    return `<div class="share-preview text-only compact-preview">${escapeHtml(label)}</div>`;
   }
   return "";
 }
-
+function compactResultForShare(raw, game) {
+  const parsed = parseSharedResult(raw, game);
+  const lines = [];
+  if (parsed.label && parsed.label !== "Saved result") lines.push(parsed.label);
+  parsed.grid.forEach((line) => lines.push(line));
+  if (!lines.length && parsed.raw)
+    lines.push(
+      parsed.raw.split("\n").find(Boolean)?.slice(0, 80) || "Saved result",
+    );
+  return lines;
+}
 function dailyHubLink() {
   if (location.protocol === "http:" || location.protocol === "https:")
     return location.origin + location.pathname;
@@ -1940,29 +1983,23 @@ function buildSummary() {
   const day = getDay();
   const lines = [];
   lines.push(`DailyHub · ${formatDate(TODAY_KEY, false)}`);
+  lines.push(`${stats.completed}/${stats.total} completed · ${stats.percent}%`);
+  lines.push(`Open DailyHub: ${dailyHubLink()}`);
   lines.push("");
-  lines.push(`Completed: ${stats.completed} / ${stats.total}`);
-  lines.push(
-    `Goal: all ${stats.total} selected game${stats.total === 1 ? "" : "s"}`,
-  );
-  lines.push(`Progress: ${stats.percent}%`);
-  lines.push(`DailyHub: ${dailyHubLink()}`);
-  lines.push("");
+  lines.push("Results");
   selectedGames().forEach((game) => {
-    const done = day.completed[game.id] ? "✅" : "⬜";
+    const done = Boolean(day.completed[game.id]);
     const rawResult = (day.results[game.id] || "").trim();
-    if (!rawResult) {
-      lines.push(`${done} ${game.name}`);
+    if (!done && !rawResult) {
+      lines.push(`⬜ ${game.name}`);
       return;
     }
-    const parsed = parseSharedResult(rawResult, game);
-    if (parsed.hasShareBlock) {
-      lines.push(`${done} ${game.name}`);
-      lines.push(rawResult);
-      lines.push("");
-    } else {
-      lines.push(`${done} ${game.name} · ${rawResult}`);
-    }
+    const compact = rawResult ? compactResultForShare(rawResult, game) : [];
+    const first = compact[0];
+    lines.push(
+      `${done ? "✅" : "⬜"} ${game.name}${first ? ` · ${first}` : ""}`,
+    );
+    compact.slice(1).forEach((line) => lines.push(`   ${line}`));
   });
   return lines.join("\n");
 }
@@ -2027,19 +2064,31 @@ function bindEvents() {
   });
   $("#play-next").addEventListener("click", playNext);
   $("#open-all-left").addEventListener("click", openAllLeft);
-  $("#copy-summary").addEventListener("click", async () => {
+  function copiedFeedback(button, label = "Copied ✓") {
+    const original = button.textContent;
+    button.textContent = label;
+    button.classList.add("copied");
+    setTimeout(() => {
+      button.textContent = original;
+      button.classList.remove("copied");
+    }, 1400);
+  }
+  $("#copy-summary").addEventListener("click", async (event) => {
     $("#summary-text").select();
     try {
       await navigator.clipboard.writeText($("#summary-text").value);
+      copiedFeedback(event.currentTarget);
       toast("Summary copied");
     } catch {
       document.execCommand("copy");
+      copiedFeedback(event.currentTarget);
       toast("Summary copied");
     }
   });
-  $("#copy-link")?.addEventListener("click", async () => {
+  $("#copy-link")?.addEventListener("click", async (event) => {
     try {
       await navigator.clipboard.writeText(dailyHubLink());
+      copiedFeedback(event.currentTarget, "Link copied ✓");
       toast("DailyHub link copied");
     } catch {
       toast("Could not copy link");

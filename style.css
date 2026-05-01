@@ -2254,3 +2254,94 @@ main {
     min-height: 78px;
   }
 }
+
+/* v10: cleaner shared results, fixed card rhythm, compact share output */
+.game-grid {
+  grid-auto-rows: minmax(240px, auto);
+}
+.game-card {
+  min-height: 240px;
+  align-content: start;
+}
+.game-card.done {
+  min-height: 240px;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+}
+.game-card.done .complete-strip {
+  min-height: 56px;
+  margin: 4px 0 0;
+  padding: 12px 14px;
+}
+.game-card.done .complete-strip strong {
+  max-width: 52%;
+}
+.result-wrap textarea {
+  resize: none;
+  min-height: 54px;
+  height: 54px;
+  max-height: 96px;
+  overflow: auto;
+}
+.result-line {
+  grid-template-columns: minmax(0, 1fr) 74px;
+}
+.paste-btn {
+  min-height: 54px;
+}
+.share-preview.compact-preview {
+  max-height: 128px;
+  overflow: auto;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+.share-preview.compact-preview pre {
+  font-size: 1.02rem;
+  line-height: 1.18;
+}
+.share-preview-title {
+  margin-bottom: 7px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.summary-card textarea {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  tab-size: 2;
+}
+.summary-actions .copied,
+.btn.copied,
+button.copied {
+  background: linear-gradient(135deg, #a8f2bd, #77dd94) !important;
+  color: #102018 !important;
+  border-color: transparent !important;
+}
+.toast {
+  animation: toast-in 0.18s ease both;
+}
+@keyframes toast-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (max-width: 720px) {
+  .game-grid {
+    grid-auto-rows: auto;
+  }
+  .result-line {
+    grid-template-columns: 1fr;
+  }
+  .paste-btn {
+    width: 100%;
+  }
+}
